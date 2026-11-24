@@ -1,4 +1,4 @@
-import { ArrowRight, Fingerprint, FileSearch, KeyRound, Server, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Building2, FileSearch, Fingerprint, KeyRound, Landmark, Network, RadioTower, Server, ShieldCheck, Users } from "lucide-react";
 import { CONTACT } from "@/content/contact";
 import type { Content } from "@/content/types";
 import { CommandCenter } from "./Screens";
@@ -6,6 +6,8 @@ import { ModuleTabs } from "./ModuleTabs";
 import { DemoForm } from "./DemoForm";
 
 const SECURITY_ICONS = [Server, Users, Fingerprint, KeyRound, FileSearch, ShieldCheck];
+/** Banks, government, telecom and energy, holding groups: in the order the audience list is written. */
+const AUDIENCE_ICONS = [Landmark, Building2, RadioTower, Network];
 
 /** The whole page in one language; `/` is Azerbaijani and `/en/` English. */
 export function Landing({ t }: { t: Content }) {
@@ -48,7 +50,7 @@ export function Landing({ t }: { t: Content }) {
       <main>
         <section className="hero">
           <div className="wrap hero-grid">
-            <div>
+            <div className="rise">
               <span className="eyebrow">{t.hero.eyebrow}</span>
               <h1>
                 {t.hero.titleA} <em>{t.hero.titleB}</em>
@@ -68,7 +70,9 @@ export function Landing({ t }: { t: Content }) {
                 ))}
               </ul>
             </div>
-            <CommandCenter s={t.screens} />
+            <div className="rise rise-2">
+              <CommandCenter s={t.screens} />
+            </div>
           </div>
         </section>
 
@@ -89,6 +93,11 @@ export function Landing({ t }: { t: Content }) {
               <p className="lead">{t.problem.lead}</p>
             </div>
             <div className="ba">
+              <div className="ba-head" aria-hidden="true">
+                <span>{t.problem.beforeLabel}</span>
+                <span />
+                <span>{t.problem.afterLabel}</span>
+              </div>
               {t.problem.rows.map((p) => (
                 <div className="ba-row" key={p.before}>
                   <span className="before">{p.before}</span>
@@ -125,7 +134,9 @@ export function Landing({ t }: { t: Content }) {
                 const Icon = SECURITY_ICONS[i % SECURITY_ICONS.length];
                 return (
                   <div className="sec-item" key={s.title}>
-                    <Icon size={22} aria-hidden="true" />
+                    <span className="sec-icon">
+                      <Icon size={17} aria-hidden="true" />
+                    </span>
                     <h3>{s.title}</h3>
                     <p>{s.text}</p>
                   </div>
@@ -143,13 +154,18 @@ export function Landing({ t }: { t: Content }) {
               <p className="lead">{t.audience.lead}</p>
             </div>
             <div className="grid-2">
-              {t.audience.items.map((a) => (
-                <div className="aud" key={a.title}>
-                  <span className="hex" aria-hidden="true" />
-                  <h3>{a.title}</h3>
-                  <p>{a.text}</p>
-                </div>
-              ))}
+              {t.audience.items.map((a, i) => {
+                const Icon = AUDIENCE_ICONS[i % AUDIENCE_ICONS.length];
+                return (
+                  <div className="aud" key={a.title}>
+                    <span className="aud-icon" aria-hidden="true">
+                      <Icon size={17} />
+                    </span>
+                    <h3>{a.title}</h3>
+                    <p>{a.text}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

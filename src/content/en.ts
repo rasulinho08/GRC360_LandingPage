@@ -36,6 +36,8 @@ export const en: Content = {
   sectors: ["Banks", "Insurance", "Government", "Telecom", "Energy", "Holding groups"],
   problem: {
     eyebrow: "The problem",
+    beforeLabel: "Today",
+    afterLabel: "With GRC360",
     title: "Spreadsheets and e-mail threads don't pass an audit",
     lead:
       "When risks, exceptions and audit findings live in separate files, nobody sees the whole picture. GRC360 puts them in one system with one history.",

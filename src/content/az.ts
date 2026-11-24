@@ -36,6 +36,8 @@ export const az: Content = {
   sectors: ["Banklar", "Sığorta", "Dövlət qurumları", "Telekom", "Enerji", "Holdinqlər"],
   problem: {
     eyebrow: "Problem",
+    beforeLabel: "Bu gün",
+    afterLabel: "GRC360 ilə",
     title: "Excel cədvəlləri və e-poçt zəncirləri auditdən keçmir",
     lead:
       "Risklər, istisnalar və audit tapıntıları müxtəlif fayllarda olanda heç kim tam mənzərəni görmür. GRC360 onları bir sistemə, bir tarixçəyə yığır.",

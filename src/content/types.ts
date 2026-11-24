@@ -27,7 +27,7 @@ export type Content = {
   };
   sectorsLabel: string;
   sectors: string[];
-  problem: { eyebrow: string; title: string; lead: string; rows: { before: string; after: string }[] };
+  problem: { eyebrow: string; title: string; lead: string; beforeLabel: string; afterLabel: string; rows: { before: string; after: string }[] };
   platform: { eyebrow: string; title: string; lead: string; tabsLabel: string };
   modules: Module[];
   security: { eyebrow: string; title: string; lead: string; items: Item[] };
