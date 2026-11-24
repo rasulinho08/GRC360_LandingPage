@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { CONTACT, SECTORS } from "@/content/site";
+import { CONTACT } from "@/content/contact";
+import type { Content } from "@/content/types";
 
 /**
  * The demo request. The site is static, so the form writes the request into the visitor's mail app
  * (to CONTACT.email). Until an address is set, it says so instead of pretending to send.
  */
-export function DemoForm() {
+export function DemoForm({ t, sectors }: { t: Content["demo"]["form"]; sectors: string[] }) {
   const [msg, setMsg] = useState<string | null>(null);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -15,76 +16,77 @@ export function DemoForm() {
     const f = new FormData(e.currentTarget);
     const get = (k: string) => String(f.get(k) ?? "").trim();
     if (!CONTACT.email) {
-      setMsg("Əlaqə ünvanı hələ əlavə olunmayıb. Sorğu göndərilmədi.");
+      setMsg(t.noAddress);
       return;
     }
+    const l = t.bodyLabels;
     const body = [
-      `Ad: ${get("name")}`,
-      `Təşkilat: ${get("company")}`,
-      `Vəzifə: ${get("role")}`,
-      `Sektor: ${get("sector")}`,
-      `E-poçt: ${get("email")}`,
-      `Telefon: ${get("phone")}`,
+      `${l.name}: ${get("name")}`,
+      `${l.company}: ${get("company")}`,
+      `${l.role}: ${get("role")}`,
+      `${l.sector}: ${get("sector")}`,
+      `${l.email}: ${get("email")}`,
+      `${l.phone}: ${get("phone")}`,
       "",
       get("note"),
     ].join("\n");
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent("GRC360 demo sorğusu: " + get("company"))}&body=${encodeURIComponent(body)}`;
-    setMsg(`E-poçt proqramınız açılmalıdır. Açılmadısa, bizə ${CONTACT.email} ünvanına yazın.`);
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(`${t.subject}: ${get("company")}`)}&body=${encodeURIComponent(body)}`;
+    setMsg(t.opened.replace("{email}", CONTACT.email));
   }
 
   return (
     <form className="form" onSubmit={submit}>
       <div className="row">
         <label htmlFor="f-name">
-          Ad, soyad
+          {t.name}
           <input id="f-name" name="name" required autoComplete="name" />
         </label>
         <label htmlFor="f-company">
-          Təşkilat
+          {t.company}
           <input id="f-company" name="company" required autoComplete="organization" />
         </label>
       </div>
       <div className="row">
         <label htmlFor="f-email">
-          İş e-poçtu
+          {t.email}
           <input id="f-email" name="email" type="email" required autoComplete="email" />
         </label>
         <label htmlFor="f-phone">
-          Telefon
+          {t.phone}
           <input id="f-phone" name="phone" type="tel" autoComplete="tel" />
         </label>
       </div>
       <div className="row">
         <label htmlFor="f-role">
-          Vəzifə
-          <input id="f-role" name="role" placeholder="məs. CISO, risk meneceri" />
+          {t.role}
+          <input id="f-role" name="role" placeholder={t.rolePlaceholder} />
         </label>
         <label htmlFor="f-sector">
-          Sektor
+          {t.sector}
           <select id="f-sector" name="sector" defaultValue="">
             <option value="" disabled>
-              Seçin
+              {t.sectorChoose}
             </option>
-            {SECTORS.map((s) => (
+            {sectors.map((s) => (
               <option key={s}>{s}</option>
             ))}
-            <option>Digər</option>
+            <option>{t.sectorOther}</option>
           </select>
         </label>
       </div>
       <label htmlFor="f-note">
-        Nəyi görmək istəyirsiniz?
-        <textarea id="f-note" name="note" rows={3} placeholder="məs. risk istisnalarının təsdiqi, ISO 27001 hazırlığı" />
+        {t.note}
+        <textarea id="f-note" name="note" rows={3} placeholder={t.notePlaceholder} />
       </label>
       <button type="submit" className="btn btn-primary" style={{ justifySelf: "start" }}>
-        Demo sifariş edin
+        {t.submit}
       </button>
       {msg ? (
         <p className="form-msg" role="status">
           {msg}
         </p>
       ) : (
-        <p className="form-note">Demonu sizin proseslərinizə uyğun hazırlayırıq.</p>
+        <p className="form-note">{t.hint}</p>
       )}
     </form>
   );

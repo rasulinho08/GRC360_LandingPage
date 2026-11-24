@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { MODULES } from "@/content/site";
+import type { Module, Screens } from "@/content/types";
 import { ModuleScreen } from "./Screens";
 
 /** The platform's modules, one at a time: what it does on the left, its screen on the right. */
-export function ModuleTabs() {
-  const [active, setActive] = useState(MODULES[0].id);
-  const m = MODULES.find((x) => x.id === active) ?? MODULES[0];
+export function ModuleTabs({ modules, label, screens }: { modules: Module[]; label: string; screens: Screens }) {
+  const [active, setActive] = useState(modules[0].id);
+  const m = modules.find((x) => x.id === active) ?? modules[0];
   return (
     <div>
-      <div className="mod-tabs" role="tablist" aria-label="Modullar">
-        {MODULES.map((x) => (
+      <div className="mod-tabs" role="tablist" aria-label={label}>
+        {modules.map((x) => (
           <button
             key={x.id}
             id={`tab-${x.id}`}
@@ -39,7 +39,7 @@ export function ModuleTabs() {
             ))}
           </ul>
         </div>
-        <ModuleScreen screen={m.screen} />
+        <ModuleScreen screen={m.screen} s={screens} />
       </div>
     </div>
   );

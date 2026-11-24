@@ -268,3 +268,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 .footer { background: #07121d; color: #7f95a5; font-size: 0.85rem; }
 .footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px; }
+
+/* ---------- language switch ---------- */
+.header-actions { display: flex; align-items: center; gap: 14px; }
+.lang { display: flex; border: 1px solid #284358; border-radius: 999px; overflow: hidden; }
+.lang a { font: 600 0.75rem/1 var(--font-mono); color: var(--on-navy-muted); text-decoration: none; padding: 7px 10px; }
+.lang a[aria-current="true"] { background: #1d3347; color: var(--on-navy); }
