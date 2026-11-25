@@ -24,7 +24,13 @@ export type Content = {
     secondary: string;
     badges: string[];
     badgesLabel: string;
+    /** The maker line above the headline. */
+    by: string;
   };
+  /** Standards a compliance package can hold; shown as a running strip under the hero. */
+  standards: { label: string; items: string[] };
+  /** How one risk moves through the platform, as numbered stages. */
+  process: { eyebrow: string; title: string; lead: string; items: Item[] };
   sectorsLabel: string;
   sectors: string[];
   problem: { eyebrow: string; title: string; lead: string; beforeLabel: string; afterLabel: string; rows: { before: string; after: string }[] };
@@ -56,13 +62,15 @@ export type Content = {
       submit: string;
       hint: string;
       noAddress: string;
+      /** Shown after the request was delivered. */
+      sent: string;
       /** {email} is replaced with the contact address. */
       opened: string;
       subject: string;
       bodyLabels: { name: string; company: string; role: string; sector: string; email: string; phone: string };
     };
   };
-  footer: { tagline: string };
+  footer: { tagline: string; product: string; company: string; contact: string; website: string; linkedin: string; madeBy: string };
   mainNavLabel: string;
   /** Text on the drawn product screens (examples, not customer data). */
   screens: Screens;

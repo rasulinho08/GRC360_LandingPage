@@ -108,7 +108,7 @@ function ApprovalScreen({ s }: { s: Screens }) {
         <h4>{a.levelHead}</h4>
         <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
           <span className="chip level">{a.level}</span>
-          <span style={{ fontSize: 12, color: "#607282" }}>{a.levelWhy}</span>
+          <span style={{ fontSize: 12, color: "var(--ink-3)" }}>{a.levelWhy}</span>
         </div>
       </div>
       <div className="panel">
@@ -163,7 +163,7 @@ function ControlsScreen({ s }: { s: Screens }) {
       </div>
       <div className="panel">
         <h4>{c.planHead}</h4>
-        <div style={{ fontSize: 12, color: "#607282" }}>{c.plan}</div>
+        <div style={{ fontSize: 12, color: "var(--ink-3)" }}>{c.plan}</div>
       </div>
     </Window>
   );
@@ -204,7 +204,7 @@ function VendorScreen({ s }: { s: Screens }) {
       </div>
       <div className="panel">
         <h4>{v.flowHead}</h4>
-        <div style={{ fontSize: 12, color: "#607282" }}>{v.flow}</div>
+        <div style={{ fontSize: 12, color: "var(--ink-3)" }}>{v.flow}</div>
       </div>
     </Window>
   );

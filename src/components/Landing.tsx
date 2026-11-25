@@ -1,4 +1,20 @@
-import { ArrowRight, Building2, FileSearch, Fingerprint, KeyRound, Landmark, Network, RadioTower, Server, ShieldCheck, Users } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  FileSearch,
+  Fingerprint,
+  KeyRound,
+  Landmark,
+  ExternalLink,
+  Mail,
+  MapPin,
+  Network,
+  Phone,
+  RadioTower,
+  Server,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 import { CONTACT } from "@/content/contact";
 import type { Content } from "@/content/types";
 import { CommandCenter } from "./Screens";
@@ -9,10 +25,21 @@ const SECURITY_ICONS = [Server, Users, Fingerprint, KeyRound, FileSearch, Shield
 /** Banks, government, telecom and energy, holding groups: in the order the audience list is written. */
 const AUDIENCE_ICONS = [Landmark, Building2, RadioTower, Network];
 
+function SectionHead({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
+  return (
+    <div className="section-head">
+      <span className="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      {lead && <p className="lead">{lead}</p>}
+    </div>
+  );
+}
+
 /** The whole page in one language; `/` is Azerbaijani and `/en/` English. */
 export function Landing({ t }: { t: Content }) {
   const year = new Date().getFullYear();
   const home = t.locale === "az" ? "/" : "/en/";
+  const address = t.locale === "az" ? CONTACT.address : CONTACT.addressEn;
   return (
     <>
       <header className="header">
@@ -21,6 +48,7 @@ export function Landing({ t }: { t: Content }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/grc360-mark.png" alt="" width={30} height={30} />
             GRC360
+            <small>by {CONTACT.company}</small>
           </a>
           <nav className="nav" aria-label={t.mainNavLabel}>
             {t.nav.map((n) => (
@@ -50,48 +78,59 @@ export function Landing({ t }: { t: Content }) {
       <main>
         <section className="hero">
           <div className="wrap hero-grid">
-            <div className="rise">
-              <span className="eyebrow">{t.hero.eyebrow}</span>
-              <h1>
-                {t.hero.titleA} <em>{t.hero.titleB}</em>
+            <div>
+              <a className="pill rise" href={CONTACT.website} target="_blank" rel="noreferrer">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/strativu-mark.png" alt="" width={18} height={18} />
+                <b>{t.hero.by}</b>
+                <span>· {t.hero.eyebrow}</span>
+              </a>
+              <h1 className="rise rise-2">
+                {t.hero.titleA} <span className="text-grad">{t.hero.titleB}</span>
               </h1>
-              <p className="lead">{t.hero.lead}</p>
-              <div className="hero-ctas">
+              <p className="lead rise rise-2">{t.hero.lead}</p>
+              <div className="hero-ctas rise rise-3">
                 <a className="btn btn-primary" href="#demo">
-                  {t.hero.primary} <ArrowRight size={16} aria-hidden="true" />
+                  {t.hero.primary} <ArrowRight size={17} aria-hidden="true" />
                 </a>
                 <a className="btn btn-ghost" href="#modules">
                   {t.hero.secondary}
                 </a>
               </div>
-              <ul className="badges" aria-label={t.hero.badgesLabel}>
+              <ul className="badges rise rise-3" aria-label={t.hero.badgesLabel}>
                 {t.hero.badges.map((b) => (
                   <li key={b}>{b}</li>
                 ))}
               </ul>
             </div>
-            <div className="rise rise-2">
+            <div className="stage rise rise-3">
               <CommandCenter s={t.screens} />
             </div>
           </div>
         </section>
 
-        <div className="sectors">
-          <div className="wrap">
-            <span>{t.sectorsLabel}</span>
-            {t.sectors.map((s) => (
-              <span key={s}>{s}</span>
-            ))}
+        <div className="ticker">
+          <div className="wrap ticker-row">
+            <span className="ticker-label">{t.standards.label}</span>
+            <div className="ticker-track">
+              <div className="ticker-items">
+                {t.standards.items.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
+                {/* A second copy makes the loop seamless; screen readers hear the list once. */}
+                {t.standards.items.map((s) => (
+                  <span key={`${s}-2`} aria-hidden="true">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <section className="section">
           <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.problem.eyebrow}</span>
-              <h2>{t.problem.title}</h2>
-              <p className="lead">{t.problem.lead}</p>
-            </div>
+            <SectionHead eyebrow={t.problem.eyebrow} title={t.problem.title} lead={t.problem.lead} />
             <div className="ba">
               <div className="ba-head" aria-hidden="true">
                 <span>{t.problem.beforeLabel}</span>
@@ -102,7 +141,7 @@ export function Landing({ t }: { t: Content }) {
                 <div className="ba-row" key={p.before}>
                   <span className="before">{p.before}</span>
                   <span className="arrow" aria-hidden="true">
-                    →
+                    <ArrowRight size={16} />
                   </span>
                   <span className="after">{p.after}</span>
                 </div>
@@ -111,31 +150,37 @@ export function Landing({ t }: { t: Content }) {
           </div>
         </section>
 
-        <section className="section" id="modules" style={{ paddingTop: 0 }}>
+        <section className="section tone" id="modules">
           <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.platform.eyebrow}</span>
-              <h2>{t.platform.title}</h2>
-              <p className="lead">{t.platform.lead}</p>
-            </div>
+            <SectionHead eyebrow={t.platform.eyebrow} title={t.platform.title} lead={t.platform.lead} />
             <ModuleTabs modules={t.modules} label={t.platform.tabsLabel} screens={t.screens} />
           </div>
         </section>
 
-        <section className="section dark-band" id="security">
+        <section className="section">
           <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.security.eyebrow}</span>
-              <h2>{t.security.title}</h2>
-              <p className="lead">{t.security.lead}</p>
-            </div>
+            <SectionHead eyebrow={t.process.eyebrow} title={t.process.title} lead={t.process.lead} />
+            <ol className="process">
+              {t.process.items.map((p) => (
+                <li className="card" key={p.title}>
+                  <h3>{p.title}</h3>
+                  <p>{p.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section tone" id="security">
+          <div className="wrap">
+            <SectionHead eyebrow={t.security.eyebrow} title={t.security.title} lead={t.security.lead} />
             <div className="grid-3">
               {t.security.items.map((s, i) => {
                 const Icon = SECURITY_ICONS[i % SECURITY_ICONS.length];
                 return (
-                  <div className="sec-item" key={s.title}>
-                    <span className="sec-icon">
-                      <Icon size={17} aria-hidden="true" />
+                  <div className="card feature" key={s.title}>
+                    <span className="icon-box" aria-hidden="true">
+                      <Icon size={19} />
                     </span>
                     <h3>{s.title}</h3>
                     <p>{s.text}</p>
@@ -148,18 +193,14 @@ export function Landing({ t }: { t: Content }) {
 
         <section className="section" id="who">
           <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.audience.eyebrow}</span>
-              <h2>{t.audience.title}</h2>
-              <p className="lead">{t.audience.lead}</p>
-            </div>
+            <SectionHead eyebrow={t.audience.eyebrow} title={t.audience.title} lead={t.audience.lead} />
             <div className="grid-2">
               {t.audience.items.map((a, i) => {
                 const Icon = AUDIENCE_ICONS[i % AUDIENCE_ICONS.length];
                 return (
-                  <div className="aud" key={a.title}>
-                    <span className="aud-icon" aria-hidden="true">
-                      <Icon size={17} />
+                  <div className="card feature" key={a.title}>
+                    <span className="icon-box" aria-hidden="true">
+                      <Icon size={19} />
                     </span>
                     <h3>{a.title}</h3>
                     <p>{a.text}</p>
@@ -170,15 +211,12 @@ export function Landing({ t }: { t: Content }) {
           </div>
         </section>
 
-        <section className="section" id="setup" style={{ paddingTop: 0 }}>
+        <section className="section tone" id="setup">
           <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.steps.eyebrow}</span>
-              <h2>{t.steps.title}</h2>
-            </div>
+            <SectionHead eyebrow={t.steps.eyebrow} title={t.steps.title} />
             <ol className="flow">
               {t.steps.items.map((s) => (
-                <li key={s.title}>
+                <li className="card" key={s.title}>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
                 </li>
@@ -187,12 +225,9 @@ export function Landing({ t }: { t: Content }) {
           </div>
         </section>
 
-        <section className="section" id="faq" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <div className="section-head">
-              <span className="eyebrow">{t.faq.eyebrow}</span>
-              <h2>{t.faq.title}</h2>
-            </div>
+        <section className="section" id="faq">
+          <div className="wrap faq-grid">
+            <SectionHead eyebrow={t.faq.eyebrow} title={t.faq.title} />
             <div className="faq">
               {t.faq.items.map((f) => (
                 <details key={f.q}>
@@ -204,31 +239,36 @@ export function Landing({ t }: { t: Content }) {
           </div>
         </section>
 
-        <section className="section dark-band" id="demo">
+        <section className="section tone demo" id="demo">
           <div className="wrap demo-grid">
-            <div className="section-head" style={{ marginBottom: 0 }}>
-              <span className="eyebrow">{t.demo.eyebrow}</span>
-              <h2>{t.demo.title}</h2>
-              <p className="lead">{t.demo.lead}</p>
-              {(CONTACT.email || CONTACT.phone || CONTACT.address) && (
-                <div className="contact-lines">
-                  {CONTACT.email && (
-                    <span>
-                      <b>{t.demo.emailLabel}:</b> {CONTACT.email}
-                    </span>
-                  )}
-                  {CONTACT.phone && (
-                    <span>
-                      <b>{t.demo.phoneLabel}:</b> {CONTACT.phone}
-                    </span>
-                  )}
-                  {CONTACT.address && (
-                    <span>
-                      <b>{t.demo.addressLabel}:</b> {CONTACT.address}
-                    </span>
-                  )}
-                </div>
-              )}
+            <div>
+              <SectionHead eyebrow={t.demo.eyebrow} title={t.demo.title} lead={t.demo.lead} />
+              <div className="contact-lines">
+                {CONTACT.email && (
+                  <a href={`mailto:${CONTACT.email}`} aria-label={`${t.demo.emailLabel}: ${CONTACT.email}`}>
+                    <Mail size={18} aria-hidden="true" />
+                    {CONTACT.email}
+                  </a>
+                )}
+                {CONTACT.phone && (
+                  <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} aria-label={`${t.demo.phoneLabel}: ${CONTACT.phone}`}>
+                    <Phone size={18} aria-hidden="true" />
+                    {CONTACT.phone}
+                  </a>
+                )}
+                {address && (
+                  <span aria-label={`${t.demo.addressLabel}: ${address}`}>
+                    <MapPin size={18} aria-hidden="true" />
+                    {address}
+                  </span>
+                )}
+                {CONTACT.linkedin && (
+                  <a href={CONTACT.linkedin} target="_blank" rel="noreferrer">
+                    <ExternalLink size={18} aria-hidden="true" />
+                    LinkedIn
+                  </a>
+                )}
+              </div>
             </div>
             <DemoForm t={t.demo.form} sectors={t.sectors} />
           </div>
@@ -236,11 +276,58 @@ export function Landing({ t }: { t: Content }) {
       </main>
 
       <footer className="footer">
-        <div className="wrap">
+        <div className="wrap footer-grid">
+          <div className="footer-brand">
+            <a className="logo" href={home}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/grc360-mark.png" alt="" width={30} height={30} />
+              GRC360
+            </a>
+            <p>{t.footer.tagline}</p>
+          </div>
+          <div>
+            <h4>{t.footer.product}</h4>
+            <ul>
+              {t.nav.map((n) => (
+                <li key={n.href}>
+                  <a href={n.href}>{n.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4>{t.footer.company}</h4>
+            <ul>
+              <li>
+                <a href={CONTACT.website} target="_blank" rel="noreferrer">
+                  {t.footer.website}
+                </a>
+              </li>
+              {CONTACT.linkedin && (
+                <li>
+                  <a href={CONTACT.linkedin} target="_blank" rel="noreferrer">
+                    {t.footer.linkedin}
+                  </a>
+                </li>
+              )}
+              {CONTACT.email && (
+                <li>
+                  <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+                </li>
+              )}
+              {address && <li>{address}</li>}
+            </ul>
+          </div>
+        </div>
+        <div className="wrap footer-base">
           <span>
-            © {year} {CONTACT.company}. GRC360.
+            © {year} {CONTACT.legalName}
           </span>
-          <span>{t.footer.tagline}</span>
+          <a className="made-by" href={CONTACT.website} target="_blank" rel="noreferrer">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/strativu-mark.png" alt="" width={16} height={16} />
+            {t.footer.madeBy}
+          </a>
         </div>
       </footer>
     </>
