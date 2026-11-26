@@ -1,6 +1,9 @@
-import { en } from "@/content/en";
-import { Landing } from "@/components/Landing";
+import { en as t } from "@/site/en";
+import { pageMeta } from "@/components/RootDocument";
+import { HomeView } from "@/views/pages";
 
-export default function HomeEn() {
-  return <Landing t={en} />;
+export const metadata = pageMeta(t, t.meta.home, "/", true);
+
+export default function Page() {
+  return <HomeView t={t} />;
 }

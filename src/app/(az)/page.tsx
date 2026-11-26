@@ -1,6 +1,9 @@
-import { az } from "@/content/az";
-import { Landing } from "@/components/Landing";
+import { az as t } from "@/site/az";
+import { pageMeta } from "@/components/RootDocument";
+import { HomeView } from "@/views/pages";
 
-export default function Home() {
-  return <Landing t={az} />;
+export const metadata = pageMeta(t, t.meta.home, "/", true);
+
+export default function Page() {
+  return <HomeView t={t} />;
 }

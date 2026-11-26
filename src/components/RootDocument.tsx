@@ -1,10 +1,14 @@
-import type { Metadata } from "next";
-import type { Content } from "@/content/types";
+import type { Metadata, Viewport } from "next";
+import type { Site } from "@/site/types";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
-/** Shared <html> for both languages: each language has its own root layout so <html lang> is right. */
-export function RootDocument({ lang, children }: { lang: string; children: React.ReactNode }) {
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#fafbfd" };
+
+/** The <html> shared by both languages: header, page, Strativu footer. */
+export function RootDocument({ t, children }: { t: Site; children: React.ReactNode }) {
   return (
-    <html lang={lang}>
+    <html lang={t.locale}>
       {/* eslint-disable-next-line @next/next/no-head-element -- App Router root layout: <head> is the supported way to add the font link. */}
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,25 +16,47 @@ export function RootDocument({ lang, children }: { lang: string; children: React
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-[6px] focus:border focus:border-line focus:bg-surface focus:px-4 focus:py-2"
+        >
+          {t.ui.skip}
+        </a>
+        <div className="relative flex min-h-screen flex-col text-ink">
+          <Header
+            prefix={t.prefix}
+            ui={t.ui}
+            modules={t.modules.map(({ slug, name, short }) => ({ slug, name, short }))}
+            solutions={t.solutions.map(({ slug, name, short }) => ({ slug, name, short }))}
+            promo={{ title: t.ui.promoTitle, text: t.ui.promoText }}
+          />
+          <main id="main" className="relative z-10 flex-1">
+            {children}
+          </main>
+          <Footer t={t} />
+        </div>
+      </body>
     </html>
   );
 }
 
-export function metadataFor(t: Content): Metadata {
+/** Per-page metadata with both language versions linked. */
+export function pageMeta(t: Site, page: { title: string; description: string }, path: string, isHome = false): Metadata {
   return {
-    title: t.meta.title,
-    description: t.meta.description,
-    alternates: { languages: { az: "/", en: "/en/" } },
+    title: isHome ? page.title : `${page.title} · GRC360`,
+    description: page.description,
+    alternates: { languages: { az: path, en: `/en${path}` } },
     openGraph: {
-      title: t.meta.ogTitle,
-      description: t.meta.description,
+      title: isHome ? page.title : `${page.title} · GRC360`,
+      description: page.description,
       images: ["/brand/grc360-logo.png"],
       locale: t.locale === "az" ? "az_AZ" : "en_US",
       type: "website",
+      siteName: "GRC360",
     },
   };
 }

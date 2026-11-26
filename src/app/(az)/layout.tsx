@@ -1,11 +1,10 @@
-import type { Viewport } from "next";
 import "../globals.css";
-import { az } from "@/content/az";
-import { RootDocument, metadataFor } from "@/components/RootDocument";
+import { az } from "@/site/az";
+import { RootDocument, pageMeta } from "@/components/RootDocument";
 
-export const metadata = metadataFor(az);
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0b1a2a" };
+export { viewport } from "@/components/RootDocument";
+export const metadata = pageMeta(az, az.meta.home, "/", true);
 
-export default function AzLayout({ children }: { children: React.ReactNode }) {
-  return <RootDocument lang="az">{children}</RootDocument>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <RootDocument t={az}>{children}</RootDocument>;
 }

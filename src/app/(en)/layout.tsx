@@ -1,11 +1,10 @@
-import type { Viewport } from "next";
 import "../globals.css";
-import { en } from "@/content/en";
-import { RootDocument, metadataFor } from "@/components/RootDocument";
+import { en } from "@/site/en";
+import { RootDocument, pageMeta } from "@/components/RootDocument";
 
-export const metadata = metadataFor(en);
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0b1a2a" };
+export { viewport } from "@/components/RootDocument";
+export const metadata = pageMeta(en, en.meta.home, "/", true);
 
-export default function EnLayout({ children }: { children: React.ReactNode }) {
-  return <RootDocument lang="en">{children}</RootDocument>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <RootDocument t={en}>{children}</RootDocument>;
 }

@@ -12,20 +12,44 @@ npm run build      # statik sayt out/ qovluğuna yazılır
 
 `out/` qovluğu istənilən veb serverdə və ya CDN-də (nginx, Vercel, Netlify, S3) yerləşdirilə bilər.
 
+## Səhifələr
+
+Hər səhifə iki dildədir: Azərbaycanca `/...`, ingiliscə `/en/...`.
+
+| Ünvan | Səhifə |
+| --- | --- |
+| `/` | Ana səhifə |
+| `/platform/` | Platformaya ümumi baxış |
+| `/platform/<modul>/` | Modul səhifəsi: `risk-management`, `approvals`, `compliance`, `controls`, `policies`, `third-parties`, `operations`, `command-center` |
+| `/solutions/<sektor>/` | Sektor səhifəsi: `banks`, `government`, `telecom-energy`, `holdings` |
+| `/frameworks/` | Standartlar |
+| `/security/` | Təhlükəsizlik və quraşdırma |
+| `/company/` | Şirkət (Strativu) |
+| `/contact/` | Demo sorğusu |
+
+Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, modul kartları, alternativ bölmələr, FAQ, son CTA), dizayn isə Strativu saytının dizayn sisteminə əsaslanır (`src/app/globals.css`: tokenlər, Geist + JetBrains Mono; `src/components/primitives.tsx`, `Reveal.tsx`, `SystemDiagram.tsx`, `ClosingCTA.tsx`, `Footer.tsx`). Footer Strativu saytının footer-i ilə eyni quruluşdadır.
+
 ## Mətnləri dəyişmək
 
-Mətnlər dilə görə iki fayldadır: `src/content/az.ts` və `src/content/en.ts` (forması `src/content/types.ts`-də). Bir dildə dəyişiklik edəndə digərini də yeniləyin.
+- Bütün mətnlər: `src/site/az.ts` və `src/site/en.ts` (forması `src/site/types.ts`). Bir dildə dəyişəndə digərini də yeniləyin.
+- Şirkət məlumatları (e-poçt, ünvan, LinkedIn, hüquqi linklər, Formspree): `src/site/company.ts`. Strativu saytındakı `site.ts`-dən götürülüb.
+- Demo forması Strativu saytının Formspree formasına göndərir; alınmasa ziyarətçinin e-poçt proqramını açır.
+- Qayda: yalnız GRC360-ın bu gün etdiyini yazın; uydurma müştəri, rəqəm və sertifikat yoxdur.
 
-- **Yayımdan əvvəl** `src/content/contact.ts`-i doldurun: `email`, `phone`, `address`. Boş sahələr səhifədə görünmür; e-poçt boşdursa, demo formu sorğu göndərmir və bunu ziyarətçiyə deyir.
-- Qayda: yalnız GRC360-ın bu gün etdiyini yazın. Planlaşdırılan işlər (Jira, e-poçt digest-ləri, hazır framework kitabxanası) funksiya kimi göstərilmir.
+## Məhsul görüntüləri və demo video
 
-## Struktur
+- `src/components/Fragments.tsx` — GRC360 ekranlarının çəkilmiş fraqmentləri. Sahələr məhsulda var, adlar və rəqəmlər nümunədir.
+- `public/media/grc360-demo.mp4` — GRC360 tətbiqinin (`GRC_Frontend_Code`) nümunə məlumatla ekran yazısı. Yenidən yazmaq üçün:
 
-- `src/app/(az)/` və `src/app/(en)/en/` — hər dilin öz layout-u (düzgün `<html lang>`) və səhifəsi.
-- `src/components/Landing.tsx` — bölmələr: hero, sektorlar, problem, modullar, təhlükəsizlik, kimlər üçün, qurulum, suallar, demo.
-- `src/components/Screens.tsx` — məhsul ekranlarının maketləri. Bunlar ekran şəkli deyil: sahələr məhsulda var, adlar və rəqəmlər nümunədir.
-- `src/components/ModuleTabs.tsx`, `src/components/DemoForm.tsx` — interaktiv hissələr.
-- `public/brand/` — GRC360 loqosu.
+```bash
+# GRC_Frontend_Code qovluğunda: npm run build && npx next start -p 3100
+cd scripts/record-demo
+OUT=. node record.js                 # .webm yazır (Playwright lazımdır)
+ffmpeg -ss 5 -i *.webm -an -vf "scale=1280:-2,fps=30" -c:v libx264 -crf 26 \
+  -pix_fmt yuv420p -movflags +faststart ../../public/media/grc360-demo.mp4
+```
+
+Skript backend-i mock edir (`fixtures.js`), real məlumat istifadə olunmur.
 
 ## Yoxlama
 
