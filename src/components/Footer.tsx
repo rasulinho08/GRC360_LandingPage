@@ -102,26 +102,25 @@ export function Footer({ t }: { t: Site }) {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col justify-between gap-3 border-t border-line pt-6 text-[13px] text-ink-3 md:flex-row md:items-center">
+        {/* The product's name, set large and fading out, with the small print under it. */}
+        <div aria-hidden className="mt-16 overflow-hidden md:mt-20">
+          <div className="footer-wordmark">GRC360</div>
+        </div>
+
+        <div className="flex flex-col justify-between gap-3 border-t border-line py-6 text-[13px] text-ink-3 md:flex-row md:items-center">
           <p>
             © {new Date().getFullYear()} {COMPANY.legalName} · {COMPANY.jurisdiction[t.locale]}
           </p>
-          <a href={`mailto:${COMPANY.email}`} className="underline-offset-4 transition-colors hover:text-ink hover:underline">
-            {COMPANY.email}
-          </a>
+          <div className="flex items-center gap-6">
+            <a href={`mailto:${COMPANY.email}`} className="underline-offset-4 transition-colors hover:text-ink hover:underline">
+              {COMPANY.email}
+            </a>
+            <a href="#top" className="inline-flex items-center gap-1.5 underline-offset-4 transition-colors hover:text-ink hover:underline">
+              {t.ui.backToTop} <span aria-hidden>↑</span>
+            </a>
+          </div>
         </div>
       </Container>
-
-      {/* The product's name, set large, the way the Strativu site closes on its own. */}
-      <div aria-hidden className="pointer-events-none mt-10 select-none pb-8 md:pb-12">
-        <Container>
-          <div className="flex items-end gap-[2.5vw] text-ink-4/50 dark:text-line-strong">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/grc360-mark.png" alt="" className="mb-[1.2vw] h-[clamp(52px,13vw,190px)] w-auto opacity-90" />
-            <span className="big-wordmark">GRC360</span>
-          </div>
-        </Container>
-      </div>
     </footer>
   );
 }

@@ -34,6 +34,7 @@ export const en: Site = {
     footerCompany: "Company",
     footerConnect: "Connect",
     theme: "Switch light / dark theme",
+    backToTop: "Back to top",
     docs: "Guide",
     productOf: "A product of",
     onThisPage: "On this page",

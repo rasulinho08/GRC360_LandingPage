@@ -3,6 +3,7 @@ import type { Site } from "@/site/types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { themeBootstrap } from "./ThemeToggle";
+import { ReadProgress } from "./ReadProgress";
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafbfd" },
@@ -24,7 +25,8 @@ export function RootDocument({ t, children }: { t: Site; children: React.ReactNo
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         />
       </head>
-      <body>
+      <body id="top">
+        <ReadProgress />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-[6px] focus:border focus:border-line focus:bg-surface focus:px-4 focus:py-2"

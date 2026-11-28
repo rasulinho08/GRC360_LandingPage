@@ -552,11 +552,6 @@
   .dark .btn-grad:hover { background: var(--brand-lift); }
   .text-grad { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--brand-ink); }
   .tint-panel { background: var(--panel); border: 1px solid var(--line); }
-  .contrast-band { background: var(--band); color: var(--band-ink); }
-  .contrast-band h2, .contrast-band h3, .contrast-band .text-white { color: var(--band-ink); }
-  .contrast-band .t-lead, .contrast-band .text-ink-2 { color: var(--band-ink-2); }
-  .contrast-band .eyebrow { color: #7fd6ff; }
-  .contrast-band .card { background: rgba(255, 255, 255, 0.03); border-color: var(--band-line); backdrop-filter: none; }
   .card { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--surface); }
   /* Clickable things look clickable; everything else stays still. */
   .card-link { cursor: pointer; transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease), transform 200ms var(--ease-out); }
@@ -568,4 +563,50 @@
   .faq-item summary::-webkit-details-marker { display: none; }
   .faq-item[open] .faq-icon { transform: rotate(45deg); color: var(--brand); }
   .big-wordmark { font-size: clamp(64px, 17vw, 240px); line-height: 0.85; letter-spacing: -0.06em; font-weight: 600; }
+}
+
+/*
+ * The dark band, unlayered on purpose: these must beat Tailwind's text utilities (text-ink-2 etc.),
+ * which sit in the utilities layer and would otherwise paint dark grey text on navy.
+ * The band is an inset, rounded panel so the step from light to dark reads as a designed edge.
+ */
+.contrast-band {
+  color: var(--band-ink);
+  background: transparent;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+@media (min-width: 768px) { .contrast-band { padding-left: 20px; padding-right: 20px; } }
+.contrast-band > .band-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(90% 70% at 85% 0%, rgba(34, 140, 255, 0.16), transparent 60%),
+    var(--band);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 40px 80px -50px rgba(3, 20, 45, 0.55);
+}
+.contrast-band h2, .contrast-band h3, .contrast-band dt, .contrast-band .text-white, .contrast-band .text-ink { color: var(--band-ink); }
+.contrast-band p, .contrast-band dd, .contrast-band .t-lead, .contrast-band .text-ink-2 { color: var(--band-ink-2); }
+.contrast-band .eyebrow { color: #7fd6ff; }
+.contrast-band .card { background: rgba(255, 255, 255, 0.035); border-color: var(--band-line); }
+/* The same inset treatment for the light tinted section. */
+.tint-band { padding-left: 12px; padding-right: 12px; }
+@media (min-width: 768px) { .tint-band { padding-left: 20px; padding-right: 20px; } }
+.tint-band > .band-inner { border-radius: 28px; background: var(--panel); border: 1px solid var(--line); }
+
+/* Reading progress along the top edge. */
+.read-progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 60; transform-origin: 0 50%; background: var(--brand); pointer-events: none; }
+
+/* Footer wordmark: large, fading out towards the bottom. */
+.footer-wordmark {
+  font-size: clamp(72px, 19vw, 280px);
+  line-height: 0.8;
+  letter-spacing: -0.065em;
+  font-weight: 700;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 16%, transparent) 0%, transparent 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
 }

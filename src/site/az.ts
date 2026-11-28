@@ -34,6 +34,7 @@ export const az: Site = {
     footerCompany: "Şirkət",
     footerConnect: "Əlaqə",
     theme: "Açıq / tünd tema",
+    backToTop: "Yuxarı qayıt",
     docs: "Bələdçi",
     productOf: "Məhsulun sahibi",
     onThisPage: "Bu səhifədə",

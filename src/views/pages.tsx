@@ -5,6 +5,7 @@ import { COMPANY } from "@/site/company";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { DemoForm } from "@/components/DemoForm";
 import { DemoVideo } from "@/components/DemoVideo";
+import { DotField } from "@/components/DotField";
 import { Faq } from "@/components/Faq";
 import { Fragment, FragmentStack } from "@/components/Fragments";
 import { ModuleIcon } from "@/components/icons";
@@ -22,7 +23,8 @@ export function HomeView({ t }: { t: Site }) {
   return (
     <>
       {/* 1 · General info: what GRC360 is, in one screen, with the real application under it. */}
-      <section className="border-b border-line bg-ground pb-16 pt-32 md:pb-24 md:pt-40">
+      <section className="relative isolate overflow-hidden border-b border-line bg-ground pb-16 pt-32 md:pb-24 md:pt-40">
+        <DotField />
         <Container>
           <Stagger className="mx-auto max-w-[880px] text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[12.5px] font-medium text-ink-2">
@@ -87,7 +89,8 @@ export function HomeView({ t }: { t: Site }) {
       </Section>
 
       {/* 4 · Sectors and documentation: the tinted section. */}
-      <section className="tint-panel !rounded-none border-x-0 py-20 md:py-28">
+      <section className="tint-band py-6 md:py-8">
+        <div className="band-inner py-16 md:py-24">
         <Container>
           <SectionHead
             eyebrow={h2.sectorsEyebrow}
@@ -107,6 +110,7 @@ export function HomeView({ t }: { t: Site }) {
             ))}
           </div>
         </Container>
+        </div>
       </section>
 
       {/* 5 · Request a demo, right here. */}
@@ -502,7 +506,8 @@ export function CompanyView({ t }: { t: Site }) {
 export function ContactView({ t }: { t: Site }) {
   const c = t.contact;
   return (
-    <section className="pb-24 pt-32 md:pb-32 md:pt-40">
+    <section className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
+      <DotField className="!h-[520px]" />
       <Container>
         <DemoBlock t={t} eyebrow={c.eyebrow} title={c.title} lead={c.lead} h1 />
       </Container>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, BookOpen, Info } from "lucide-react";
 import type { DocPage, DocSlug, Site } from "@/site/types";
 import { Container, Eyebrow } from "@/components/primitives";
+import { DotField } from "@/components/DotField";
 
 const anchor = (s: string) =>
   s
@@ -61,7 +62,8 @@ function Sidebar({ t, current }: { t: Site; current?: DocSlug }) {
 export function DocsIndexView({ t }: { t: Site }) {
   const d = t.docs;
   return (
-    <section className="pb-24 pt-32 md:pb-32 md:pt-40">
+    <section className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
+      <DotField className="!h-[520px]" />
       <Container>
         <div className="max-w-[760px]">
           <Eyebrow>{d.eyebrow}</Eyebrow>

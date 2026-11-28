@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
+import { DotField } from "./DotField";
 
 /*
  * Layout and type primitives, ported from the Strativu website (components/site/primitives.tsx and
@@ -28,6 +29,14 @@ export function Section({
     surface: "bg-surface-2/60 border-y border-line",
     contrast: "contrast-band",
   };
+  if (tone === "contrast")
+    return (
+      <section id={id} className={`relative isolate scroll-mt-24 py-6 md:py-8 ${tones[tone]} ${className}`}>
+        <div className="band-inner py-16 md:py-24">
+          <Container>{children}</Container>
+        </div>
+      </section>
+    );
   return (
     <section id={id} className={`relative isolate scroll-mt-24 py-20 md:py-32 ${tones[tone]} ${className}`}>
       <Container>{children}</Container>
@@ -139,12 +148,6 @@ export function TextLink({ href, children, className = "" }: { href: string; chi
   );
 }
 
-/** Kept for call sites; the site no longer paints glows behind headers. */
-export function Ambience(props: { className?: string }) {
-  void props;
-  return null;
-}
-
 /** Standard bordered card (Strativu SpotlightCard). */
 export function SpotlightCard({
   children,
@@ -191,7 +194,7 @@ export function PageHeader({
 }) {
   return (
     <header className="relative isolate overflow-hidden border-b border-line bg-surface pb-16 pt-32 md:pb-24 md:pt-44">
-      <Ambience className="-z-10" />
+      <DotField />
       <Container>
         <div className={aside ? "grid grid-cols-1 items-center gap-12 lg:grid-cols-12" : ""}>
           <div className={aside ? "lg:col-span-6" : "max-w-[860px] md:max-w-[66%]"}>

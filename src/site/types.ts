@@ -143,6 +143,7 @@ export type Site = {
     footerCompany: string;
     footerConnect: string;
     theme: string;
+    backToTop: string;
     docs: string;
     productOf: string;
     onThisPage: string;
