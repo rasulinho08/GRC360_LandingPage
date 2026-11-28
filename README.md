@@ -20,7 +20,7 @@ Hər səhifə iki dildədir: Azərbaycanca `/...`, ingiliscə `/en/...`.
 | --- | --- |
 | `/` | Ana səhifə |
 | `/platform/` | Platformaya ümumi baxış |
-| `/platform/<modul>/` | Modul səhifəsi; standartlar `compliance` səhifəsindədir (`#frameworks`). Modullar: Modul səhifəsi: `risk-management`, `approvals`, `compliance`, `controls`, `policies`, `third-parties`, `operations`, `command-center` |
+| `/platform/<modul>/` | Modul səhifəsi; standartlar `compliance` səhifəsindədir (`#frameworks`). Modullar: `risk-management`, `approvals`, `compliance`, `controls`, `policies`, `third-parties`, `operations`, `command-center` |
 | `/solutions/<sektor>/` | Sektor səhifəsi: `banks`, `government`, `telecom-energy`, `holdings` |
 | `/security/` | Təhlükəsizlik və quraşdırma |
 | `/company/` | Şirkət (Strativu) |
