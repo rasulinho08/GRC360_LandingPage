@@ -1,6 +1,6 @@
 /**
- * The recorded walkthrough of the real GRC360 application (sample data), framed like a product
- * window. Muted autoplay loop, with controls; a poster shows until it plays.
+ * The GRC360 product film (40 s, from the Strativu team), framed like a product window. It starts
+ * muted and loops; the controls let a visitor turn the sound on or watch it from the start.
  */
 export function DemoVideo({ label, caption }: { label: string; caption?: string }) {
   return (
@@ -12,12 +12,12 @@ export function DemoVideo({ label, caption }: { label: string; caption?: string 
             <span className="h-2 w-2 rounded-full bg-line-strong" />
             <span className="h-2 w-2 rounded-full bg-line-strong" />
           </span>
-          <span className="mono-label normal-case tracking-[0.04em] text-ink-2">grc360 · demo</span>
+          <span className="mono-label normal-case tracking-[0.04em] text-ink-2">grc360 · film</span>
         </div>
         <video
-          className="block aspect-[16/10] w-full bg-surface-2 object-cover object-top"
-          src="/media/grc360-demo.mp4"
-          poster="/media/grc360-demo-poster.jpg"
+          className="block aspect-video w-full bg-[#0b1524]"
+          src="/media/grc360-film.mp4"
+          poster="/media/grc360-film-poster.jpg"
           autoPlay
           muted
           loop

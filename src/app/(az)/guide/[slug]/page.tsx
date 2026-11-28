@@ -1,4 +1,4 @@
-import { en as t } from "@/site/en";
+import { az as t } from "@/site/az";
 import { pageMeta } from "@/components/RootDocument";
 import type { DocSlug } from "@/site/types";
 import { DocView } from "@/views/docs";
@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const x = t.docs.pages.find((y) => y.slug === slug)!;
-  return pageMeta(t, { title: x.title, description: x.summary }, `/docs/${slug}/`);
+  return pageMeta(t, { title: x.title, description: x.summary }, `/guide/${slug}/`);
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {

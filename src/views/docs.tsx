@@ -23,7 +23,7 @@ function Sidebar({ t, current }: { t: Site; current?: DocSlug }) {
   return (
     <nav aria-label={t.docs.title} className="lg:sticky lg:top-24">
       <Link
-        href={`${t.prefix}/docs/`}
+        href={`${t.prefix}/guide/`}
         className={`mb-6 flex items-center gap-2 text-[14px] font-medium ${current ? "text-ink-2 hover:text-ink" : "text-brand-ink"}`}
       >
         <BookOpen className="h-4 w-4" strokeWidth={1.75} />
@@ -39,7 +39,7 @@ function Sidebar({ t, current }: { t: Site; current?: DocSlug }) {
               return (
                 <li key={slug}>
                   <Link
-                    href={`${t.prefix}/docs/${slug}/`}
+                    href={`${t.prefix}/guide/${slug}/`}
                     aria-current={active ? "page" : undefined}
                     className={`-ml-px block border-l-2 py-1.5 pl-4 text-[14px] transition-colors ${
                       active ? "border-brand font-medium text-ink" : "border-transparent text-ink-2 hover:border-line-strong hover:text-ink"
@@ -81,7 +81,7 @@ export function DocsIndexView({ t }: { t: Site }) {
                   const page = d.pages.find((p) => p.slug === slug)!;
                   return (
                     <li key={slug}>
-                      <Link href={`${t.prefix}/docs/${slug}/`} className="card card-link group flex h-full flex-col p-6">
+                      <Link href={`${t.prefix}/guide/${slug}/`} className="card card-link group flex h-full flex-col p-6">
                         <span className="text-[17px] font-medium tracking-[-0.01em] text-ink">{page.title}</span>
                         <span className="mt-2 flex-1 text-[14.5px] leading-[1.55] text-ink-2">{page.summary}</span>
                         <span className="card-link-cta mt-5 inline-flex items-center gap-1 text-[14px] font-medium text-brand-ink">
@@ -167,7 +167,7 @@ export function DocView({ t, slug }: { t: Site; slug: DocSlug }) {
 
             <div className="mt-16 grid grid-cols-1 gap-3 border-t border-line pt-8 sm:grid-cols-2">
               {prev ? (
-                <Link href={`${t.prefix}/docs/${prev.slug}/`} className="card card-link group p-5">
+                <Link href={`${t.prefix}/guide/${prev.slug}/`} className="card card-link group p-5">
                   <span className="flex items-center gap-1.5 text-[13px] text-ink-3">
                     <ArrowLeft className="h-3.5 w-3.5" /> {t.ui.prev}
                   </span>
@@ -177,7 +177,7 @@ export function DocView({ t, slug }: { t: Site; slug: DocSlug }) {
                 <span />
               )}
               {next && (
-                <Link href={`${t.prefix}/docs/${next.slug}/`} className="card card-link group p-5 text-right">
+                <Link href={`${t.prefix}/guide/${next.slug}/`} className="card card-link group p-5 text-right">
                   <span className="flex items-center justify-end gap-1.5 text-[13px] text-ink-3">
                     {t.ui.next} <ArrowRight className="h-3.5 w-3.5" />
                   </span>

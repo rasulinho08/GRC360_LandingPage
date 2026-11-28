@@ -20,13 +20,12 @@ Hər səhifə iki dildədir: Azərbaycanca `/...`, ingiliscə `/en/...`.
 | --- | --- |
 | `/` | Ana səhifə |
 | `/platform/` | Platformaya ümumi baxış |
-| `/platform/<modul>/` | Modul səhifəsi: `risk-management`, `approvals`, `compliance`, `controls`, `policies`, `third-parties`, `operations`, `command-center` |
+| `/platform/<modul>/` | Modul səhifəsi; standartlar `compliance` səhifəsindədir (`#frameworks`). Modullar: Modul səhifəsi: `risk-management`, `approvals`, `compliance`, `controls`, `policies`, `third-parties`, `operations`, `command-center` |
 | `/solutions/<sektor>/` | Sektor səhifəsi: `banks`, `government`, `telecom-energy`, `holdings` |
-| `/frameworks/` | Standartlar |
 | `/security/` | Təhlükəsizlik və quraşdırma |
 | `/company/` | Şirkət (Strativu) |
-| `/docs/` | Sənədlər (12 səhifə: başlanğıc, idarəetmə, modullarda iş) |
-| `/docs/<səhifə>/` | Sənəd səhifəsi |
+| `/guide/` | Bələdçi: GRC360-dan necə istifadə etməli (12 səhifə) |
+| `/guide/<səhifə>/` | Bələdçi səhifəsi |
 | `/contact/` | Demo sorğusu |
 
 Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, modul kartları, alternativ bölmələr, FAQ, son CTA), dizayn isə Strativu saytının dizayn sisteminə əsaslanır (`src/app/globals.css`: tokenlər, Geist + JetBrains Mono; `src/components/primitives.tsx`, `Reveal.tsx`, `SystemDiagram.tsx`, `ClosingCTA.tsx`, `Footer.tsx`). Footer Strativu saytının footer-i ilə eyni quruluşdadır.
@@ -34,7 +33,7 @@ Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, 
 ## Mətnləri dəyişmək
 
 - Bütün mətnlər: `src/site/az.ts` və `src/site/en.ts` (forması `src/site/types.ts`). Bir dildə dəyişəndə digərini də yeniləyin.
-- Sənədlər: `src/site/docs-az.ts` və `src/site/docs-en.ts`. Hər səhifə bölmələrdən ibarətdir (`body`, `list`, `steps`, `note`); qruplar və sıra `groups`-dadır.
+- Bələdçi: `src/site/docs-az.ts` və `src/site/docs-en.ts`. Hər səhifə bölmələrdən ibarətdir (`body`, `list`, `steps`, `note`); qruplar və sıra `groups`-dadır.
 - Tema: açıq və tünd. Üst paneldəki düymə ilə dəyişir, seçim brauzerdə saxlanılır; ilk girişdə sistemin teması götürülür.
 - Şirkət məlumatları (e-poçt, ünvan, LinkedIn, hüquqi linklər, Formspree): `src/site/company.ts`. Strativu saytındakı `site.ts`-dən götürülüb.
 - Demo forması Strativu saytının Formspree formasına göndərir; alınmasa ziyarətçinin e-poçt proqramını açır.
@@ -43,17 +42,8 @@ Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, 
 ## Məhsul görüntüləri və demo video
 
 - `src/components/Fragments.tsx` — GRC360 ekranlarının çəkilmiş fraqmentləri. Sahələr məhsulda var, adlar və rəqəmlər nümunədir.
-- `public/media/grc360-demo.mp4` — GRC360 tətbiqinin (`GRC_Frontend_Code`) nümunə məlumatla ekran yazısı. Yenidən yazmaq üçün:
-
-```bash
-# GRC_Frontend_Code qovluğunda: npm run build && npx next start -p 3100
-cd scripts/record-demo
-OUT=. node record.js                 # .webm yazır (Playwright lazımdır)
-ffmpeg -ss 5 -i *.webm -an -vf "scale=1280:-2,fps=30" -c:v libx264 -crf 26 \
-  -pix_fmt yuv420p -movflags +faststart ../../public/media/grc360-demo.mp4
-```
-
-Skript backend-i mock edir (`fixtures.js`), real məlumat istifadə olunmur.
+- `public/media/grc360-film.mp4` — GRC360 məhsul filmi (40 san, 1080p, səsli; Strativu komandasından). Səssiz başlayır, idarəetmə düymələri ilə səsi açmaq olar.
+- `scripts/record-demo/` — tətbiqin nümunə məlumatla ekran yazısını yenidən çəkmək üçün skript (hazırda saytda istifadə olunmur).
 
 ## Yoxlama
 

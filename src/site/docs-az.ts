@@ -5,10 +5,10 @@ import type { Site } from "./types";
  * sənədləri bunu əvəz edəcək və ya genişləndirəcək. Yalnız məhsulun bu gün etdiyini yazın.
  */
 export const docsAz: Site["docs"] = {
-  eyebrow: "Sənədlər",
-  title: "GRC360 sənədləri",
-  lead: "GRC360-ı necə quraşdırmaq, təşkilatınızı necə qurmaq və hər modulda necə işləmək.",
-  note: "Bu, sənədlərin ilk versiyasıdır. Lazım olan bir şey yoxdursa, hello@strativu.com ünvanına yazın.",
+  eyebrow: "Bələdçi",
+  title: "GRC360-dan necə istifadə etməli",
+  lead: "Addım-addım kömək: GRC360-ın quraşdırılması, təşkilatınızın qurulması və hər modulda iş.",
+  note: "Bu, bələdçinin ilk versiyasıdır. Lazım olan bir şey yoxdursa, hello@strativu.com ünvanına yazın.",
   groups: [
     { title: "Başlanğıc", pages: ["overview", "installation", "first-steps"] },
     { title: "İdarəetmə", pages: ["users-and-access", "authentication", "import-export", "administration"] },

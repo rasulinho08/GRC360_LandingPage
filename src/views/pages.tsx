@@ -94,7 +94,7 @@ export function HomeView({ t }: { t: Site }) {
             title={h2.sectorsTitle}
             lead={h2.sectorsLead}
             action={
-              <Btn href={p("/docs/")} variant="secondary" arrow>
+              <Btn href={p("/guide/")} variant="secondary" arrow>
                 {h2.docsCta}
               </Btn>
             }
@@ -283,6 +283,8 @@ export function ModuleView({ t, slug }: { t: Site; slug: ModuleSlug }) {
         <ShowcaseRow key={s.title} s={s} t={t} flip={i % 2 === 1} tone={i % 2 === 0 ? "surface" : "ground"} />
       ))}
 
+      {m.slug === "compliance" && <FrameworksBlock t={t} />}
+
       {m.slug === "command-center" && (
         <Section tone="surface">
           <SectionHead eyebrow={t.video.eyebrow} title={t.video.title} lead={t.video.lead} />
@@ -378,51 +380,6 @@ export function SolutionView({ t, slug }: { t: Site; slug: SolutionSlug }) {
           </ul>
         </div>
       </Section>
-
-      <ClosingCTA t={t} />
-    </>
-  );
-}
-
-/* ───────────────────────────── Frameworks ───────────────────────────── */
-
-export function FrameworksView({ t }: { t: Site }) {
-  const fw = t.frameworks;
-  return (
-    <>
-      <PageHeader eyebrow={fw.eyebrow} title={fw.title} lead={fw.lead}>
-        <Btn href={`${t.prefix}/platform/compliance/`} arrow>
-          {t.modules.find((m) => m.slug === "compliance")!.name}
-        </Btn>
-      </PageHeader>
-
-      <Section>
-        <SectionHead title={fw.howTitle} />
-        <NumberedCards items={fw.how} />
-      </Section>
-
-      <Section tone="surface">
-        <SectionHead title={fw.groupsTitle} lead={fw.groupsNote} />
-        <div className="space-y-12">
-          {fw.groups.map((g) => (
-            <div key={g.name}>
-              <p className="mono-label mb-4">{g.name}</p>
-              <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {g.items.map((it, i) => (
-                  <Reveal as="li" key={it.name} delay={i * 0.045}>
-                    <div className="card h-full p-5">
-                      <div className="text-[16px] font-medium leading-[1.3] tracking-[-0.01em] text-ink">{it.name}</div>
-                      <div className="mt-1.5 text-[14px] text-ink-2">{it.text}</div>
-                    </div>
-                  </Reveal>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <ShowcaseRow s={t.modules.find((m) => m.slug === "compliance")!.showcases[0]} t={t} />
 
       <ClosingCTA t={t} />
     </>
@@ -550,5 +507,45 @@ export function ContactView({ t }: { t: Site }) {
         <DemoBlock t={t} eyebrow={c.eyebrow} title={c.title} lead={c.lead} h1 />
       </Container>
     </section>
+  );
+}
+
+/** Standards and laws, inside the Compliance page: how packages work and what organisations load. */
+function FrameworksBlock({ t }: { t: Site }) {
+  const fw = t.frameworks;
+  return (
+    <>
+      <Section tone="contrast" id="frameworks">
+        <SectionHead eyebrow={fw.eyebrow} title={fw.title} lead={fw.lead} />
+        <ol className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--r-lg)] border border-[var(--band-line)] bg-[var(--band-line)] md:grid-cols-3">
+          {fw.how.map((it, i) => (
+            <li key={it.title} className="bg-[var(--band)] p-7">
+              <span className="font-mono text-[13px] text-[#7fd6ff]">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 text-[19px] font-medium">{it.title}</h3>
+              <p className="mt-2 text-[15px] leading-[1.6] text-[var(--band-ink-2)]">{it.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section>
+        <SectionHead title={fw.groupsTitle} lead={fw.groupsNote} />
+        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
+          {fw.groups.map((g) => (
+            <div key={g.name}>
+              <p className="mono-label mb-3">{g.name}</p>
+              <ul className="divide-y divide-line overflow-hidden rounded-[var(--r-md)] border border-line bg-surface">
+                {g.items.map((it) => (
+                  <li key={it.name} className="flex items-baseline justify-between gap-4 px-5 py-4">
+                    <span className="text-[16px] font-medium tracking-[-0.01em] text-ink">{it.name}</span>
+                    <span className="text-right text-[14px] text-ink-2">{it.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Section>
+    </>
   );
 }

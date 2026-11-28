@@ -121,7 +121,7 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
       <div ref={navRef} className="relative mx-auto max-w-[1200px]">
         <div
           className={`flex h-14 items-center justify-between gap-6 rounded-full pl-5 pr-2 transition-[background-color,border-color,box-shadow] duration-300 ${
-            scrolled || open || menu ? "glass-pill shadow-[var(--e2)]" : "border border-transparent"
+            scrolled || open || menu ? "border border-line bg-surface/95 shadow-[var(--e2)] backdrop-blur-md" : "border border-transparent"
           }`}
         >
           <Logo prefix={prefix} by={ui.by} />
@@ -129,13 +129,10 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
           <nav aria-label={ui.mainNav} className="hidden items-center gap-1 lg:flex">
             {trigger("product", ui.product, isActive("/platform"))}
             {trigger("solutions", ui.solutions, isActive("/solutions"))}
-            <Link href={p("/frameworks/")} className={linkCls(isActive("/frameworks"))} onMouseEnter={() => setMenu(null)}>
-              {ui.frameworks}
-            </Link>
             <Link href={p("/security/")} className={linkCls(isActive("/security"))} onMouseEnter={() => setMenu(null)}>
               {ui.security}
             </Link>
-            <Link href={p("/docs/")} className={linkCls(isActive("/docs"))} onMouseEnter={() => setMenu(null)}>
+            <Link href={p("/guide/")} className={linkCls(isActive("/guide"))} onMouseEnter={() => setMenu(null)}>
               {ui.docs}
             </Link>
             <Link href={p("/company/")} className={linkCls(isActive("/company"))} onMouseEnter={() => setMenu(null)}>
@@ -261,9 +258,8 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
               ))}
               <div className="mt-8 flex flex-col">
                 {[
-                  [ui.frameworks, "/frameworks/"],
                   [ui.security, "/security/"],
-                  [ui.docs, "/docs/"],
+                  [ui.docs, "/guide/"],
                   [ui.company, "/company/"],
                   [ui.contact, "/contact/"],
                 ].map(([label, path]) => (

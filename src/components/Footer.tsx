@@ -24,7 +24,7 @@ export function Footer({ t }: { t: Site }) {
       title: t.ui.footerSolutions,
       links: [
         ...t.solutions.map((s) => ({ label: s.name, href: p(`/solutions/${s.slug}/`) })),
-        { label: t.ui.frameworks, href: p("/frameworks/") },
+        { label: t.ui.frameworks, href: p("/platform/compliance/#frameworks") },
       ],
     },
     {

@@ -5,10 +5,10 @@ import type { Site } from "./types";
  * full documentation will replace or extend it. Keep it to what the product does today.
  */
 export const docsEn: Site["docs"] = {
-  eyebrow: "Documentation",
-  title: "GRC360 documentation",
-  lead: "How to install GRC360, set up your organisation and work in each module.",
-  note: "This is the first version of the documentation. Ask us at hello@strativu.com if something you need is missing.",
+  eyebrow: "Guide",
+  title: "How to use GRC360",
+  lead: "Step-by-step help: installing GRC360, setting up your organisation and working in each module.",
+  note: "This is the first version of the guide. Ask us at hello@strativu.com if something you need is missing.",
   groups: [
     { title: "Getting started", pages: ["overview", "installation", "first-steps"] },
     { title: "Administration", pages: ["users-and-access", "authentication", "import-export", "administration"] },
