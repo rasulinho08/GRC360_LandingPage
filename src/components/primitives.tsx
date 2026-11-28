@@ -139,16 +139,10 @@ export function TextLink({ href, children, className = "" }: { href: string; chi
   );
 }
 
-/** One soft light behind a hero or page header. */
-export function Ambience({ className = "" }: { className?: string }) {
-  return (
-    <div aria-hidden className={`pointer-events-none absolute inset-x-0 top-0 h-[560px] overflow-hidden ${className}`}>
-      <div
-        className="absolute -top-[40%] left-1/2 h-[640px] w-[1100px] -translate-x-1/2 rounded-full blur-[120px]"
-        style={{ background: "radial-gradient(closest-side, var(--glow-1), transparent 72%)" }}
-      />
-    </div>
-  );
+/** Kept for call sites; the site no longer paints glows behind headers. */
+export function Ambience(props: { className?: string }) {
+  void props;
+  return null;
 }
 
 /** Standard bordered card (Strativu SpotlightCard). */
@@ -164,7 +158,7 @@ export function SpotlightCard({
   style?: CSSProperties;
 }) {
   return (
-    <Tag style={style} className={`card card-hover ${className}`}>
+    <Tag style={style} className={`card ${className}`}>
       {children}
     </Tag>
   );
@@ -196,7 +190,7 @@ export function PageHeader({
   aside?: ReactNode;
 }) {
   return (
-    <header className="relative isolate overflow-hidden border-b border-line pb-16 pt-32 md:pb-24 md:pt-44">
+    <header className="relative isolate overflow-hidden border-b border-line bg-surface pb-16 pt-32 md:pb-24 md:pt-44">
       <Ambience className="-z-10" />
       <Container>
         <div className={aside ? "grid grid-cols-1 items-center gap-12 lg:grid-cols-12" : ""}>

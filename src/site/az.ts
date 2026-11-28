@@ -1,4 +1,5 @@
 import type { Site } from "./types";
+import { docsAz } from "./docs-az";
 
 /**
  * Azərbaycan dilində sayt. Yalnız GRC360-ın bu gün etdiyini yazın (tətbiqlə yoxlanılıb): uydurma
@@ -32,6 +33,13 @@ export const az: Site = {
     footerSolutions: "Həllər",
     footerCompany: "Şirkət",
     footerConnect: "Əlaqə",
+    theme: "Açıq / tünd tema",
+    docs: "Sənədlər",
+    productOf: "Məhsulun sahibi",
+    onThisPage: "Bu səhifədə",
+    docsHome: "Bütün sənədlər",
+    prev: "Əvvəlki",
+    next: "Növbəti",
     footerLegal: "Hüquqi",
     email: "E-poçt",
     privacy: "Məxfilik",
@@ -635,6 +643,29 @@ export const az: Site = {
     lead: "Hər demonu sizin reyestrləriniz, risk səviyyələriniz və təsdiq addımlarınız əsasında qururuq, sonra quraşdırmanı komandanızla planlayırıq.",
     primary: "Demo sifariş edin",
     secondary: "Platformaya baxın",
+  },
+  docs: docsAz,
+  home2: {
+    modulesEyebrow: "GRC360-ın içində",
+    modulesTitle: "Səkkiz modul, bir qeydlər bazası.",
+    modulesLead: "Hər modulun detalları ilə öz səhifəsi var. Komandanızın işlədiyi modulu seçin.",
+    whyEyebrow: "Niyə GRC360",
+    whyTitle: "Məlumatını xaricə göndərə bilməyən təşkilatlar üçün.",
+    whyLead: "Tənzimlənən təşkilatda GRC sistemini seçəndə həlledici olanlar.",
+    why: [
+      { title: "Öz serverlərinizdə", text: "Öz infrastrukturunuzda quraşdırılır; verilənlər bazası və fayllar oradan çıxmır." },
+      { title: "Azərbaycan dilində", text: "İnterfeys və server mesajları Azərbaycan və ingilis dilində, hər istifadəçiyə görə." },
+      { title: "Öz qaydalarınız", text: "Sizin risk matrisiniz, səviyyə adlarınız, təsdiq addımlarınız və hüquqlarınız." },
+      { title: "Hər şey qeyddə", text: "Hər dəyişiklik jurnalda, hər təsdiq dəyişdirilə bilməyən zəncirdə." },
+    ],
+    whyCta: "Təhlükəsizlik və quraşdırma",
+    sectorsEyebrow: "Kimlər üçün",
+    sectorsTitle: "Tənzimlənən sektorlar üçün.",
+    sectorsLead: "GRC360-ın sektorunuza necə uyğun gəldiyinə baxın və ya əvvəlcə sənədləri oxuyun.",
+    docsCta: "Sənədləri oxuyun",
+    demoEyebrow: "Demo sifariş edin",
+    demoTitle: "GRC360-ı öz proseslərinizdə görün.",
+    demoLead: "Təşkilatınız haqqında yazın. Demonu sizin reyestrləriniz, risk səviyyələriniz və təsdiq addımlarınız əsasında quracağıq.",
   },
   video: {
     eyebrow: "Məhsul",

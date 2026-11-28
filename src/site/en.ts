@@ -1,4 +1,5 @@
 import type { Site } from "./types";
+import { docsEn } from "./docs-en";
 
 /**
  * English site. Describe only what GRC360 does today (checked against the application): no invented
@@ -32,6 +33,13 @@ export const en: Site = {
     footerSolutions: "Solutions",
     footerCompany: "Company",
     footerConnect: "Connect",
+    theme: "Switch light / dark theme",
+    docs: "Docs",
+    productOf: "A product of",
+    onThisPage: "On this page",
+    docsHome: "All documentation",
+    prev: "Previous",
+    next: "Next",
     footerLegal: "Legal",
     email: "Email",
     privacy: "Privacy",
@@ -635,6 +643,29 @@ export const en: Site = {
     lead: "We set up each demo around your registers, risk levels and approval steps, then plan the installation with your team.",
     primary: "Book a demo",
     secondary: "Explore the platform",
+  },
+  docs: docsEn,
+  home2: {
+    modulesEyebrow: "Inside GRC360",
+    modulesTitle: "Eight modules, one set of records.",
+    modulesLead: "Each module has its own page with the details. Pick the one your team works in.",
+    whyEyebrow: "Why GRC360",
+    whyTitle: "Built for organisations that can't send their data abroad.",
+    whyLead: "The things that decide a GRC system in a regulated organisation.",
+    why: [
+      { title: "On your servers", text: "Installed in your own infrastructure; the database and files never leave it." },
+      { title: "In Azerbaijani", text: "Interface and server messages in Azerbaijani and English, per user." },
+      { title: "Your own rules", text: "Your risk matrix, level names, approval steps and permissions." },
+      { title: "On the record", text: "Every change logged, every approval kept as a tamper-evident chain." },
+    ],
+    whyCta: "Security and deployment",
+    sectorsEyebrow: "Who it's for",
+    sectorsTitle: "Made for regulated sectors.",
+    sectorsLead: "See how GRC360 fits your sector, or read the documentation first.",
+    docsCta: "Read the documentation",
+    demoEyebrow: "Book a demo",
+    demoTitle: "See GRC360 with your own processes.",
+    demoLead: "Tell us about your organisation. We'll set up a demo around your registers, risk levels and approval steps.",
   },
   video: {
     eyebrow: "The product",

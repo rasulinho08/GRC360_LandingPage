@@ -5,11 +5,6 @@
 export function DemoVideo({ label, caption }: { label: string; caption?: string }) {
   return (
     <figure className="relative">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-x-10 -bottom-8 -top-6 -z-10 rounded-[40px] blur-[60px]"
-        style={{ background: "var(--brand-grad-soft)" }}
-      />
       <div className="overflow-hidden rounded-[var(--r-lg)] border border-line bg-surface shadow-[var(--e3)]">
         <div className="flex h-10 items-center gap-2.5 border-b border-line-soft bg-surface-2/70 px-4">
           <span className="flex gap-1.5" aria-hidden>

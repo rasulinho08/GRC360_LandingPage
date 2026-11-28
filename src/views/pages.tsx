@@ -10,145 +10,156 @@ import { Fragment, FragmentStack } from "@/components/Fragments";
 import { ModuleIcon } from "@/components/icons";
 import { Reveal, ScrollLift, Stagger } from "@/components/Reveal";
 import { SystemDiagram } from "@/components/SystemDiagram";
-import { Btn, Container, Eyebrow, PageHeader, Section, SectionHead, Strip, TextLink, Ticker } from "@/components/primitives";
+import { Btn, Container, Eyebrow, PageHeader, Section, SectionHead, Strip, TextLink } from "@/components/primitives";
 import { BeforeAfter, FeatureCards, ModuleTile, NumberedCards, ShowcaseRow, SolutionTile } from "./blocks";
 
-/* ───────────────────────────── Home ───────────────────────────── */
+/* ───────────────────────────── Home: five sections ───────────────────────────── */
 
 export function HomeView({ t }: { t: Site }) {
   const h = t.home;
+  const h2 = t.home2;
   const p = (path: string) => `${t.prefix}${path}`;
   return (
     <>
-      {/* Hero: tinted inset panel, centred copy, the real application below (Vanta home hero). */}
-      <section className="px-3 pt-24 md:px-5 md:pt-28">
-        <div className="tint-panel relative isolate overflow-hidden rounded-[24px] px-5 pt-14 md:px-12 md:pt-20">
-          <Container className="!px-0">
-            <Stagger className="mx-auto max-w-[900px] text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-surface/80 px-3 py-1 text-[12.5px] font-medium text-ink-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
-                {h.eyebrow}
-                <span className="text-ink-3">· {t.ui.by}</span>
-              </span>
-              <h1 className="t-display mx-auto mt-7 max-w-[15ch] !text-[clamp(44px,7vw,92px)]">{h.title}</h1>
-              <p className="t-lead mx-auto mt-6 max-w-[60ch]">{h.lead}</p>
-              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <Btn href={p("/contact/")} size="lg" arrow>
-                  {h.primary}
-                </Btn>
-                <Btn href={p("/platform/")} size="lg" variant="secondary">
-                  {h.secondary}
-                </Btn>
-              </div>
-              <Strip items={h.proof} className="mt-8 justify-center" />
-            </Stagger>
-            <ScrollLift className="mx-auto mt-14 max-w-[1080px] translate-y-px">
-              <DemoVideo label={t.video.label} />
-            </ScrollLift>
-          </Container>
-        </div>
+      {/* 1 · General info: what GRC360 is, in one screen, with the real application under it. */}
+      <section className="border-b border-line bg-ground pb-16 pt-32 md:pb-24 md:pt-40">
+        <Container>
+          <Stagger className="mx-auto max-w-[880px] text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[12.5px] font-medium text-ink-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-ok" aria-hidden />
+              {h.eyebrow}
+            </span>
+            <h1 className="t-display mx-auto mt-7 max-w-[16ch] !text-[clamp(42px,6.4vw,84px)]">{h.title}</h1>
+            <p className="t-lead mx-auto mt-6 max-w-[60ch]">{h.lead}</p>
+            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+              <Btn href="#demo" size="lg" arrow>
+                {h.primary}
+              </Btn>
+              <Btn href={p("/platform/")} size="lg" variant="secondary">
+                {h.secondary}
+              </Btn>
+            </div>
+            <Strip items={h.proof} className="mt-8 justify-center" />
+          </Stagger>
+          <ScrollLift className="mx-auto mt-14 max-w-[1080px]">
+            <DemoVideo label={t.video.label} caption={t.video.caption} />
+          </ScrollLift>
+        </Container>
       </section>
 
-      <div className="border-b border-line py-7">
-        <Container className="flex flex-col gap-4 md:flex-row md:items-center md:gap-10">
-          <span className="mono-label shrink-0">{h.standardsLabel}</span>
-          <Ticker items={h.standards} />
-        </Container>
-      </div>
-
-      <Section>
-        <SectionHead eyebrow={h.allHere.eyebrow} title={h.allHere.title} lead={h.allHere.lead} align="center" />
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 2 · The modules, each a link to its own page. */}
+      <Section tone="surface">
+        <SectionHead eyebrow={h2.modulesEyebrow} title={h2.modulesTitle} lead={h2.modulesLead} />
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {t.modules.map((m, i) => (
-            <Reveal as="li" key={m.slug} delay={(i % 4) * 0.05}>
-              <ModuleTile m={m} t={t} />
+            <Reveal as="li" key={m.slug} delay={(i % 4) * 0.04}>
+              <ModuleTile m={m} t={t} preview={false} />
             </Reveal>
           ))}
         </ul>
-      </Section>
-
-      <Section tone="surface">
-        <SectionHead eyebrow={h.problem.eyebrow} title={h.problem.title} lead={h.problem.lead} />
-        <BeforeAfter p={h.problem} />
-      </Section>
-
-      <Section>
-        <SectionHead eyebrow={h.process.eyebrow} title={h.process.title} lead={h.process.lead} />
-        <NumberedCards items={h.process.items} cols={5} />
-      </Section>
-
-      <Section tone="surface">
-        <SectionHead eyebrow={h.builtFor.eyebrow} title={h.builtFor.title} lead={h.builtFor.lead} />
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {t.solutions.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 0.05}>
-              <SolutionTile s={s} t={t} />
-            </Reveal>
-          ))}
+        <div className="mt-8">
+          <TextLink href={p("/platform/")}>{t.ui.platformOverview}</TextLink>
         </div>
       </Section>
 
+      {/* 3 · Why: the dark band. */}
       <Section tone="contrast">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Eyebrow>{h.sovereign.eyebrow}</Eyebrow>
-            <h2 className="t-h2 text-white">{h.sovereign.title}</h2>
-            <p className="t-lead mt-5">{h.sovereign.lead}</p>
+            <Eyebrow>{h2.whyEyebrow}</Eyebrow>
+            <h2 className="t-h2">{h2.whyTitle}</h2>
+            <p className="t-lead mt-5">{h2.whyLead}</p>
             <div className="mt-8">
               <Btn href={p("/security/")} variant="invert" arrow>
-                {h.sovereign.cta}
+                {h2.whyCta}
               </Btn>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7">
-            {h.sovereign.items.map((it, i) => (
-              <Reveal key={it.title} delay={i * 0.05}>
-                <div className="card h-full p-6">
-                  <h3 className="text-[17px] font-medium text-white">{it.title}</h3>
-                  <p className="mt-2 text-[14.5px] leading-[1.6] text-ink-2">{it.text}</p>
-                </div>
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--r-lg)] border border-[var(--band-line)] bg-[var(--band-line)] sm:grid-cols-2 lg:col-span-7">
+            {h2.why.map((it) => (
+              <div key={it.title} className="bg-[var(--band)] p-7">
+                <dt className="text-[18px] font-medium">{it.title}</dt>
+                <dd className="mt-2 text-[15px] leading-[1.6] text-[var(--band-ink-2)]">{it.text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Section>
+
+      {/* 4 · Sectors and documentation: the tinted section. */}
+      <section className="tint-panel !rounded-none border-x-0 py-20 md:py-28">
+        <Container>
+          <SectionHead
+            eyebrow={h2.sectorsEyebrow}
+            title={h2.sectorsTitle}
+            lead={h2.sectorsLead}
+            action={
+              <Btn href={p("/docs/")} variant="secondary" arrow>
+                {h2.docsCta}
+              </Btn>
+            }
+          />
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {t.solutions.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 0.04}>
+                <SolutionTile s={s} t={t} />
               </Reveal>
             ))}
           </div>
-        </div>
-      </Section>
+        </Container>
+      </section>
 
-      <Section>
-        <SectionHead
-          eyebrow={h.frameworks.eyebrow}
-          title={h.frameworks.title}
-          lead={h.frameworks.lead}
-          action={
-            <Btn href={p("/frameworks/")} variant="secondary" arrow>
-              {h.frameworks.cta}
-            </Btn>
-          }
-        />
-        <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {h.standards.map((s, i) => (
-            <Reveal as="li" key={s} delay={(i % 4) * 0.04}>
-              <div className="card flex h-full min-h-[120px] flex-col justify-between p-5">
-                <span className="font-mono text-[11px] text-ink-3">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-[16px] font-medium leading-[1.3] tracking-[-0.01em] text-ink">{s}</span>
-              </div>
-            </Reveal>
+      {/* 5 · Request a demo, right here. */}
+      <section id="demo" className="scroll-mt-24 border-t border-line bg-ground py-20 md:py-28">
+        <Container>
+          <DemoBlock t={t} eyebrow={h2.demoEyebrow} title={h2.demoTitle} lead={h2.demoLead} />
+        </Container>
+      </section>
+    </>
+  );
+}
+
+/** Demo request: steps and contact on the left, the form on the right. */
+function DemoBlock({ t, eyebrow, title, lead, h1 = false }: { t: Site; eyebrow: string; title: string; lead: string; h1?: boolean }) {
+  const c = t.contact;
+  const Heading = h1 ? "h1" : "h2";
+  return (
+    <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+      <div>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <Heading className={h1 ? "t-h1" : "t-h2"}>{title}</Heading>
+        <p className="t-lead mt-5 measure">{lead}</p>
+        <ul className="mt-10 space-y-6">
+          {c.steps.map((s) => (
+            <li key={s.title} className="flex gap-4">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-ink">
+                <Check className="h-4 w-4" strokeWidth={2.25} />
+              </span>
+              <span>
+                <span className="block text-[17px] font-medium text-ink">{s.title}</span>
+                <span className="mt-1 block text-[15px] text-ink-2">{s.text}</span>
+              </span>
+            </li>
           ))}
         </ul>
-      </Section>
-
-      <Section tone="surface">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 className="t-h2">{h.faqTitle}</h2>
-          </div>
-          <div className="lg:col-span-8">
-            <Faq items={h.faq} />
-          </div>
+        <div className="mt-10 space-y-3 border-t border-line pt-8 text-[15px] text-ink-2">
+          <a href={`mailto:${COMPANY.email}`} className="inline-link flex w-fit items-center gap-3" aria-label={`${c.emailLabel}: ${COMPANY.email}`}>
+            <Mail className="h-4 w-4" /> {COMPANY.email}
+          </a>
+          <span className="flex items-center gap-3" aria-label={`${c.addressLabel}: ${COMPANY.address[t.locale]}`}>
+            <MapPin className="h-4 w-4 text-ink-3" /> {COMPANY.address[t.locale]}
+          </span>
+          {COMPANY.linkedin && (
+            <a href={COMPANY.linkedin} target="_blank" rel="noreferrer" className="inline-link flex w-fit items-center gap-3">
+              <ArrowRight className="h-4 w-4" /> LinkedIn ↗
+            </a>
+          )}
         </div>
-      </Section>
-
-      <ClosingCTA t={t} />
-    </>
+      </div>
+      <Reveal>
+        <DemoForm t={c.form} />
+      </Reveal>
+    </div>
   );
 }
 
@@ -156,6 +167,7 @@ export function HomeView({ t }: { t: Site }) {
 
 export function PlatformView({ t }: { t: Site }) {
   const pl = t.platform;
+  const h = t.home;
   return (
     <>
       <PageHeader eyebrow={pl.eyebrow} title={pl.title} lead={pl.lead}>
@@ -175,18 +187,25 @@ export function PlatformView({ t }: { t: Site }) {
       </Section>
 
       <Section tone="surface">
-        <SectionHead eyebrow={t.video.eyebrow} title={t.video.title} lead={t.video.lead} />
-        <Reveal>
-          <DemoVideo label={t.video.label} caption={t.video.caption} />
-        </Reveal>
+        <SectionHead eyebrow={h.problem.eyebrow} title={h.problem.title} lead={h.problem.lead} />
+        <BeforeAfter p={h.problem} />
       </Section>
 
       <Section>
+        <SectionHead eyebrow={h.process.eyebrow} title={h.process.title} lead={h.process.lead} />
+        <NumberedCards items={h.process.items} cols={5} />
+      </Section>
+
+      <Section tone="contrast">
         <SectionHead eyebrow={pl.eyebrow} title={pl.pillarsTitle} />
-        <NumberedCards items={pl.pillars.slice(0, 3)} />
-        <div className="mt-4">
-          <FeatureCards items={pl.pillars.slice(3)} cols={2} />
-        </div>
+        <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--r-lg)] border border-[var(--band-line)] bg-[var(--band-line)] md:grid-cols-2">
+          {pl.pillars.map((it) => (
+            <div key={it.title} className="bg-[var(--band)] p-7">
+              <dt className="text-[18px] font-medium">{it.title}</dt>
+              <dd className="mt-2 text-[15px] leading-[1.6] text-[var(--band-ink-2)]">{it.text}</dd>
+            </div>
+          ))}
+        </dl>
       </Section>
 
       <Section tone="surface" id="modules">
@@ -203,6 +222,17 @@ export function PlatformView({ t }: { t: Site }) {
       <Section>
         <SectionHead eyebrow="GRC360" title={pl.foundationTitle} />
         <FeatureCards items={pl.foundation} check />
+      </Section>
+
+      <Section tone="surface">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <h2 className="t-h2">{h.faqTitle}</h2>
+          </div>
+          <div className="lg:col-span-8">
+            <Faq items={h.faq} />
+          </div>
+        </div>
       </Section>
 
       <ClosingCTA t={t} />
@@ -515,49 +545,9 @@ export function CompanyView({ t }: { t: Site }) {
 export function ContactView({ t }: { t: Site }) {
   const c = t.contact;
   return (
-    <section className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[560px] w-[1100px] -translate-x-1/2 -translate-y-1/3 rounded-full blur-[120px]"
-        style={{ background: "radial-gradient(closest-side, var(--glow-1), transparent 72%)" }}
-      />
+    <section className="pb-24 pt-32 md:pb-32 md:pt-40">
       <Container>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-          <div>
-            <Eyebrow>{c.eyebrow}</Eyebrow>
-            <h1 className="t-h1">{c.title}</h1>
-            <p className="t-lead mt-5 measure">{c.lead}</p>
-            <ul className="mt-10 space-y-6">
-              {c.steps.map((s) => (
-                <li key={s.title} className="flex gap-4">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-ink">
-                    <Check className="h-4 w-4" strokeWidth={2.25} />
-                  </span>
-                  <span>
-                    <span className="block text-[17px] font-medium text-ink">{s.title}</span>
-                    <span className="mt-1 block text-[15px] text-ink-2">{s.text}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 space-y-3 border-t border-line pt-8 text-[15px] text-ink-2">
-              <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 hover:text-ink" aria-label={`${c.emailLabel}: ${COMPANY.email}`}>
-                <Mail className="h-4 w-4 text-brand" /> {COMPANY.email}
-              </a>
-              <span className="flex items-center gap-3" aria-label={`${c.addressLabel}: ${COMPANY.address[t.locale]}`}>
-                <MapPin className="h-4 w-4 text-brand" /> {COMPANY.address[t.locale]}
-              </span>
-              {COMPANY.linkedin && (
-                <a href={COMPANY.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-ink">
-                  <ArrowRight className="h-4 w-4 text-brand" /> LinkedIn
-                </a>
-              )}
-            </div>
-          </div>
-          <Reveal>
-            <DemoForm t={c.form} />
-          </Reveal>
-        </div>
+        <DemoBlock t={t} eyebrow={c.eyebrow} title={c.title} lead={c.lead} h1 />
       </Container>
     </section>
   );

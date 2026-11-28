@@ -13,10 +13,10 @@ export function ModuleTile({ m, t, preview = true }: { m: ModulePage; t: Site; p
   return (
     <Link
       href={`${t.prefix}/platform/${m.slug}/`}
-      className="card card-hover group flex h-full flex-col overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="card card-link group flex h-full flex-col overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       {preview && (
-        <div aria-hidden className="relative h-[190px] overflow-hidden border-b border-line bg-[linear-gradient(180deg,var(--brand-soft),var(--ground-2))] px-5 pt-5">
+        <div aria-hidden className="relative h-[190px] overflow-hidden border-b border-line bg-[var(--panel)] px-5 pt-5">
           <div className="pointer-events-none w-[125%] origin-top-left scale-[0.8]">
             <Fragment v={m.heroVisual} f={t.fragments} framed={false} />
           </div>
@@ -31,7 +31,7 @@ export function ModuleTile({ m, t, preview = true }: { m: ModulePage; t: Site; p
           <h3 className="text-[17px] font-semibold tracking-[-0.015em] text-ink">{m.name}</h3>
         </div>
         <p className="mt-3 flex-1 text-[14.5px] leading-[1.55] text-ink-2">{m.short}</p>
-        <span className="mt-5 inline-flex items-center gap-1 text-[14px] font-medium text-brand-ink">
+        <span className="card-link-cta mt-5 inline-flex items-center gap-1 text-[14px] font-medium text-brand-ink">
           {t.ui.learnMore}
           <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
         </span>
@@ -44,14 +44,14 @@ export function SolutionTile({ s, t }: { s: SolutionPage; t: Site }) {
   return (
     <Link
       href={`${t.prefix}/solutions/${s.slug}/`}
-      className="card card-hover group flex h-full flex-col p-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="card card-link group flex h-full flex-col p-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       <span className="flex h-11 w-11 items-center justify-center rounded-[12px] border border-brand-line bg-brand-soft text-brand-ink">
         <SolutionIcon slug={s.slug} className="h-5 w-5" />
       </span>
       <h3 className="mt-6 text-[20px] font-semibold tracking-[-0.02em] text-ink">{s.name}</h3>
       <p className="mt-2 flex-1 text-[15px] leading-[1.6] text-ink-2">{s.lead}</p>
-      <span className="mt-6 inline-flex items-center gap-1 text-[14px] font-medium text-brand-ink">
+      <span className="card-link-cta mt-6 inline-flex items-center gap-1 text-[14px] font-medium text-brand-ink">
         {t.ui.learnMore}
         <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
       </span>
@@ -66,9 +66,9 @@ export function NumberedCards({ items, cols = 3 }: { items: Item[]; cols?: 3 | 5
     <ol className={`grid grid-cols-1 gap-4 ${grid}`}>
       {items.map((it, i) => (
         <Reveal as="li" key={it.title} delay={i * 0.06}>
-          <SpotlightCard className="rim flex h-full flex-col p-7">
-            <span className="text-grad text-[40px] font-semibold leading-none tracking-[-0.04em]">{String(i + 1).padStart(2, "0")}</span>
-            <h3 className="mt-7 text-[19px] leading-[1.3] tracking-[-0.015em] text-ink">{it.title}</h3>
+          <SpotlightCard className="flex h-full flex-col p-7">
+            <span className="font-mono text-[13px] font-medium text-brand-ink">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="mt-5 text-[19px] leading-[1.3] tracking-[-0.015em] text-ink">{it.title}</h3>
             <p className="mt-3 text-[15px] leading-[1.6] text-ink-2">{it.text}</p>
           </SpotlightCard>
         </Reveal>

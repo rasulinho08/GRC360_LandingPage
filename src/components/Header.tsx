@@ -8,6 +8,7 @@ import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import type { ModuleSlug, SolutionSlug } from "@/site/types";
 import { Btn, Container } from "./primitives";
 import { ModuleIcon, SolutionIcon } from "./icons";
+import { ThemeToggle } from "./ThemeToggle";
 
 export type HeaderProps = {
   prefix: string;
@@ -26,6 +27,8 @@ export type HeaderProps = {
     menu: string;
     close: string;
     language: string;
+    theme: string;
+    docs: string;
     mainNav: string;
     by: string;
   };
@@ -132,6 +135,9 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
             <Link href={p("/security/")} className={linkCls(isActive("/security"))} onMouseEnter={() => setMenu(null)}>
               {ui.security}
             </Link>
+            <Link href={p("/docs/")} className={linkCls(isActive("/docs"))} onMouseEnter={() => setMenu(null)}>
+              {ui.docs}
+            </Link>
             <Link href={p("/company/")} className={linkCls(isActive("/company"))} onMouseEnter={() => setMenu(null)}>
               {ui.company}
             </Link>
@@ -139,6 +145,7 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
 
           <div className="hidden items-center gap-1.5 lg:flex">
             <LangSwitch pathname={pathname} locale={locale} label={ui.language} />
+            <ThemeToggle label={ui.theme} />
             <Link href={p("/contact/")} className="px-3 text-[14px] text-ink-2 transition-colors duration-150 hover:text-ink">
               {ui.contact}
             </Link>
@@ -147,8 +154,9 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
             </Btn>
           </div>
 
-          <div className="flex items-center gap-1 lg:hidden">
+          <div className="flex items-center gap-1.5 lg:hidden">
             <LangSwitch pathname={pathname} locale={locale} label={ui.language} />
+            <ThemeToggle label={ui.theme} />
             <button
               className="rounded-full p-2.5 text-ink transition-colors hover:bg-surface-2"
               onClick={() => setOpen((v) => !v)}
@@ -255,6 +263,7 @@ export function Header({ prefix, ui, modules, solutions, promo }: HeaderProps) {
                 {[
                   [ui.frameworks, "/frameworks/"],
                   [ui.security, "/security/"],
+                  [ui.docs, "/docs/"],
                   [ui.company, "/company/"],
                   [ui.contact, "/contact/"],
                 ].map(([label, path]) => (

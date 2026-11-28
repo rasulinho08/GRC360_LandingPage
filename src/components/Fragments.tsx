@@ -44,7 +44,7 @@ export function Frame({ children, title, className = "", glow = false }: { child
 function Pill({ children, tone = "next" }: { children: ReactNode; tone?: Tone }) {
   const t = {
     ok: "bg-ok-soft text-ok border-transparent",
-    wait: "bg-[#fdf3e1] text-[#9a5b06] border-transparent",
+    wait: "bg-[var(--pill-wait-bg)] text-[var(--pill-wait-fg)] border-transparent",
     bad: "bg-warn-soft text-warn border-transparent",
     next: "bg-surface-2 text-ink-2 border-line",
   }[tone];
@@ -75,10 +75,10 @@ function Head({ children }: { children: ReactNode }) {
 
 function band(score: number) {
   if (score >= 20) return "bg-[#e0584f] text-white";
-  if (score >= 12) return "bg-[#f5b08a]";
-  if (score >= 8) return "bg-[#f8dea6]";
-  if (score >= 4) return "bg-[#eef0c4]";
-  return "bg-[#d3efe1]";
+  if (score >= 12) return "bg-[#f5b08a] text-[#3a2416]";
+  if (score >= 8) return "bg-[#f8dea6] text-[#3a2a12]";
+  if (score >= 4) return "bg-[#eef0c4] text-[#2f3312]";
+  return "bg-[#d3efe1] text-[#12352b]";
 }
 const HEAT: Record<string, number> = { "5x5": 1, "5x4": 2, "4x4": 3, "4x3": 1, "3x3": 5, "3x2": 2, "2x3": 3, "2x2": 4, "1x2": 2 };
 
@@ -95,7 +95,7 @@ function Heatmap({ f }: { f: Fragments["heatmap"] }) {
                 <span
                   key={i}
                   title={f.cell.replace("{l}", String(l)).replace("{i}", String(i)).replace("{s}", String(l * i))}
-                  className={`grid aspect-[1.35] place-items-center rounded-[5px] font-semibold ${band(l * i)} ${n ? "ring-1 ring-inset ring-ink/40" : "opacity-80"}`}
+                  className={`grid aspect-[1.35] place-items-center rounded-[5px] font-semibold ${band(l * i)} ${n ? "ring-1 ring-inset ring-black/40" : "opacity-80"}`}
                 >
                   {n ?? ""}
                 </span>

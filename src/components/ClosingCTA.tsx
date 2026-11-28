@@ -5,12 +5,7 @@ import { Reveal } from "./Reveal";
 /** Closing statement with one primary and one secondary action (Strativu ClosingCTA). */
 export function ClosingCTA({ t }: { t: Site }) {
   return (
-    <section className="relative isolate overflow-hidden border-t border-line py-24 md:py-36">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
-        style={{ background: "radial-gradient(closest-side, var(--glow-1), transparent 72%)" }}
-      />
+    <section className="relative isolate overflow-hidden border-t border-line bg-ground-2 py-24 md:py-32">
       <Container>
         <Reveal>
           <div className="mx-auto max-w-[860px] text-center">

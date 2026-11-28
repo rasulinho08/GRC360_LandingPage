@@ -25,6 +25,8 @@ Hər səhifə iki dildədir: Azərbaycanca `/...`, ingiliscə `/en/...`.
 | `/frameworks/` | Standartlar |
 | `/security/` | Təhlükəsizlik və quraşdırma |
 | `/company/` | Şirkət (Strativu) |
+| `/docs/` | Sənədlər (12 səhifə: başlanğıc, idarəetmə, modullarda iş) |
+| `/docs/<səhifə>/` | Sənəd səhifəsi |
 | `/contact/` | Demo sorğusu |
 
 Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, modul kartları, alternativ bölmələr, FAQ, son CTA), dizayn isə Strativu saytının dizayn sisteminə əsaslanır (`src/app/globals.css`: tokenlər, Geist + JetBrains Mono; `src/components/primitives.tsx`, `Reveal.tsx`, `SystemDiagram.tsx`, `ClosingCTA.tsx`, `Footer.tsx`). Footer Strativu saytının footer-i ilə eyni quruluşdadır.
@@ -32,6 +34,8 @@ Səhifə quruluşu vanta.com-dakı nümunələrə (mega menyu, məhsul hero-su, 
 ## Mətnləri dəyişmək
 
 - Bütün mətnlər: `src/site/az.ts` və `src/site/en.ts` (forması `src/site/types.ts`). Bir dildə dəyişəndə digərini də yeniləyin.
+- Sənədlər: `src/site/docs-az.ts` və `src/site/docs-en.ts`. Hər səhifə bölmələrdən ibarətdir (`body`, `list`, `steps`, `note`); qruplar və sıra `groups`-dadır.
+- Tema: açıq və tünd. Üst paneldəki düymə ilə dəyişir, seçim brauzerdə saxlanılır; ilk girişdə sistemin teması götürülür.
 - Şirkət məlumatları (e-poçt, ünvan, LinkedIn, hüquqi linklər, Formspree): `src/site/company.ts`. Strativu saytındakı `site.ts`-dən götürülüb.
 - Demo forması Strativu saytının Formspree formasına göndərir; alınmasa ziyarətçinin e-poçt proqramını açır.
 - Qayda: yalnız GRC360-ın bu gün etdiyini yazın; uydurma müştəri, rəqəm və sertifikat yoxdur.

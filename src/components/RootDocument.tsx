@@ -2,15 +2,20 @@ import type { Metadata, Viewport } from "next";
 import type { Site } from "@/site/types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { themeBootstrap } from "./ThemeToggle";
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#fafbfd" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafbfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#03060d" },
+  ] };
 
 /** The <html> shared by both languages: header, page, Strativu footer. */
 export function RootDocument({ t, children }: { t: Site; children: React.ReactNode }) {
   return (
-    <html lang={t.locale}>
+    <html lang={t.locale} suppressHydrationWarning>
       {/* eslint-disable-next-line @next/next/no-head-element -- App Router root layout: <head> is the supported way to add the font link. */}
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}

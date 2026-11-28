@@ -40,6 +40,23 @@ export type SolutionSlug = "banks" | "government" | "telecom-energy" | "holdings
 
 export type Item = { title: string; text: string };
 
+export type DocSlug =
+  | "overview"
+  | "installation"
+  | "first-steps"
+  | "users-and-access"
+  | "authentication"
+  | "import-export"
+  | "risk-scoring"
+  | "approvals"
+  | "compliance-packages"
+  | "controls-and-policies"
+  | "operations-and-dashboard"
+  | "administration";
+
+export type DocSection = { heading: string; body: string[]; list?: string[]; steps?: string[]; note?: string };
+export type DocPage = { slug: DocSlug; title: string; summary: string; sections: DocSection[] };
+
 /** A text block beside a product fragment; module pages alternate them left and right. */
 export type Showcase = { eyebrow: string; title: string; text: string; points: string[]; visual: Visual };
 
@@ -125,6 +142,13 @@ export type Site = {
     footerSolutions: string;
     footerCompany: string;
     footerConnect: string;
+    theme: string;
+    docs: string;
+    productOf: string;
+    onThisPage: string;
+    docsHome: string;
+    prev: string;
+    next: string;
     footerLegal: string;
     email: string;
     privacy: string;
@@ -238,6 +262,33 @@ export type Site = {
     };
   };
   cta: { eyebrow: string; title: string; lead: string; primary: string; secondary: string };
+  /** Product documentation: grouped pages, each a list of sections. */
+  docs: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    note: string;
+    groups: { title: string; pages: DocSlug[] }[];
+    pages: DocPage[];
+  };
+  /** The five sections of the home page. */
+  home2: {
+    modulesEyebrow: string;
+    modulesTitle: string;
+    modulesLead: string;
+    whyEyebrow: string;
+    whyTitle: string;
+    whyLead: string;
+    why: Item[];
+    whyCta: string;
+    sectorsEyebrow: string;
+    sectorsTitle: string;
+    sectorsLead: string;
+    docsCta: string;
+    demoEyebrow: string;
+    demoTitle: string;
+    demoLead: string;
+  };
   /** The recorded walkthrough of the real application. */
   video: { eyebrow: string; title: string; lead: string; caption: string; label: string };
   /** How the modules relate, drawn as one diagram on the platform page. */
